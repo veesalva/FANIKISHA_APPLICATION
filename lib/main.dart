@@ -1,5 +1,5 @@
 
-import 'package:fanikisha_app/screens/home.dart';
+import 'package:fanikisha_app/screens/authetication/home.dart';
 import 'package:flutter/material.dart';
 
 void main(){
