@@ -1,9 +1,9 @@
 import 'package:fanikisha_app/screens/authetication/forget_password/forget_password_model_bottom_sheet.dart';
+import 'package:fanikisha_app/screens/authetication/sign_in_controller.dart';
 import 'package:fanikisha_app/screens/authetication/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'forget_password/forget_password_btn_widget.dart';
+import 'package:get/get.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -11,15 +11,23 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final controller = Get.put(SignInController());
   bool _rememberMe = false;
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
     super.dispose();
+  }
+
+  bool _obscureText = true;
+
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      // Perform signup logic here
+      SignInController.instance.signInUser(
+          controller.email.text.trim(), controller.password.text.trim());
+    }
   }
 
   @override
@@ -33,62 +41,86 @@ class _LoginState extends State<Login> {
             const SizedBox(height: 50.0),
             Text(
               "Welcome Back".toUpperCase(),
-              style: TextStyle(fontSize: 25.0),
+              style: const TextStyle(fontSize: 25.0),
             ),
             const SizedBox(
               height: 20,
             ),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.person_outline_outlined),
-                labelText: 'Email',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 28.0),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.fingerprint_outlined),
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            //rember me and forgot password options
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Checkbox(
-                      value: _rememberMe,
-                      onChanged: (value) {
-                        setState(() {
-                          _rememberMe = value!;
-                        });
-                      },
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextField(
+                    controller: controller.email,
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.person_outline_outlined),
+                      labelText: 'Email',
+                      border: OutlineInputBorder(),
                     ),
-                    const Text('Remember Me'),
-                  ],
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Navigate to the forgot password screen
-                  ForgetPasswordScreen.buildShowModalBottomSheet(context);
-                  },
-                  child: const Text('Forgot Password?'),
-                ),
-              ],
+                  ),
+                  const SizedBox(height: 28.0),
+                  TextField(
+                    controller: controller.password,
+                    obscureText: _obscureText,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.fingerprint_outlined),
+                      labelText: 'Password',
+                      border: OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  //remember me and forgot password options
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: _rememberMe,
+                            onChanged: (value) {
+                              setState(() {
+                                _rememberMe = value!;
+                              });
+                            },
+                          ),
+                          const Text('Remember Me'),
+                        ],
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          // Navigate to the forgot password screen
+                          ForgetPasswordScreen.buildShowModalBottomSheet(
+                              context);
+                        },
+                        child: const Text('Forgot Password?'),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20.0),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _submitForm;
+                      },
+                      child: const Text('Login'),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                // Perform login logic using _emailController.text and _passwordController.text
-              },
-              child: const Text('Login'),
-            ),
+
             const SizedBox(height: 25.0),
             //divider codes
             const Row(children: <Widget>[
@@ -118,7 +150,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             //dont have an account button
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
@@ -141,7 +173,7 @@ class _LoginState extends State<Login> {
                     );
                   },
                   child: const Text(
-                    'Log in',
+                    'Sign Up',
                     style: TextStyle(
                       color: Colors.blue,
                       decoration: TextDecoration.underline,
@@ -156,5 +188,4 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-
 }

@@ -16,16 +16,16 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 80), // Adjust as needed
               Center(
                 child: Image.asset(
-                  'images/saving.jpg',
-                  width: 100,
-                  height: 100,
+                  'images/logo.png',
+                  width: 150,
+                  height: 150,
                 ),
               ),
               const SizedBox(height: 16),
               const Text(
                 'FANIKISHA ',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 35,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
               const Text(
                 'Level Up your Saving habit ',
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
@@ -79,7 +79,7 @@ class HomePage extends StatelessWidget {
                 const Text(
                   'Already have an account?',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16,
                   ),
                 ),
@@ -95,7 +95,7 @@ class HomePage extends StatelessWidget {
                   child: const Text(
                     'Log in',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.blue,
                       decoration: TextDecoration.underline,
                       fontSize: 16,
                     ),
@@ -118,7 +118,7 @@ class HomePage extends StatelessWidget {
                 const Text(
                   'Don\'t have an account?',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16,
                   ),
                 ),
@@ -134,7 +134,7 @@ class HomePage extends StatelessWidget {
                   child: const Text(
                     'Sign up',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.blue,
                       decoration: TextDecoration.underline,
                       fontSize: 16,
                     ),

@@ -1,8 +1,10 @@
 import 'package:fanikisha_app/screens/authetication/forget_password/forget_password_mail_screen.dart';
+import 'package:fanikisha_app/screens/authetication/forget_password/forget_password_phoneNo_screen.dart';
 import 'package:flutter/material.dart';
-import 'forget_password_btn_widget.dart';
 
 class ForgetPasswordScreen {
+  // This is the bottomModal when pop up when the user clicks Forgot password
+  // It gives the user options  to reset password either using phone number or email
   static Future<dynamic> buildShowModalBottomSheet(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -23,29 +25,83 @@ class ForgetPasswordScreen {
             const SizedBox(
               height: 30.0,
             ),
-            ForgetPasswordBtnWidget(
-              title: "E-mail",
-              iconBtn: Icons.mail_outline_rounded,
-              subtitle: "Reset via E-mail Verification",
-              onTap: () {
-                //todo: this button to goto ForgotEmail does not work
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ForgetPasswordMailScreen(),
-                  ), // Navigate to the target page
-                );
-              },
+            // it is the button inside the bottomModalSheet for email reset option
+            Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const ForgetPasswordMailScreen();
+                        },
+                      ),
+                    );
+                  },
+                  icon: const Row(
+                    children: [
+                      Icon(Icons.email, color: Colors.white),
+                      SizedBox(width: 8), // Add space between icon and text
+                    ],
+                  ),
+                  label: const Text(
+                    'Reset Your Password using  Email',
+                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.all(30),
+                    backgroundColor: Colors.green,
+                    side: const BorderSide(color: Colors.grey),
+                    alignment:
+                        Alignment.centerLeft, // Align icon and text to right
+                  ),
+                ),
+              ),
             ),
-            const SizedBox(
-              height: 20.0,
+            SizedBox(
+              height: 30,
             ),
-            ForgetPasswordBtnWidget(
-                title: "Phone No",
-                iconBtn: Icons.mobile_friendly_rounded,
-                subtitle: "Reset via Phone Verification",
-                onTap: () {}),
+            // it is the button inside the bottomModalSheet for phone number reset option
+            Align(
+              alignment: Alignment.center,
+              child: SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const ForgotPasswordPhoneNoScreen();
+                        },
+                      ),
+                    );
+                  },
+                  icon: const Row(
+                    children: [
+                      Icon(Icons.phone_android, color: Colors.white),
+                      SizedBox(width: 8), // Add space between icon and text
+                    ],
+                  ),
+                  label: const Text(
+                    'Reset Your Password using  Phone Number',
+                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.all(30),
+                    backgroundColor: Colors.green,
+                    side: const BorderSide(color: Colors.grey),
+                    alignment:
+                    Alignment.centerLeft, // Align icon and text to right
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

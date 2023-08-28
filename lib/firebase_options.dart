@@ -66,6 +66,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '828413775508',
     projectId: 'fanikishaapp',
     storageBucket: 'fanikishaapp.appspot.com',
+    androidClientId: '828413775508-dklghlkml89f37ingt9cc4nuf8pqph84.apps.googleusercontent.com',
     iosClientId: '828413775508-vt7afhq1u4b2dddh92k6emrstvslbrkc.apps.googleusercontent.com',
     iosBundleId: 'com.example.fanikishaApp',
   );
@@ -76,6 +77,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '828413775508',
     projectId: 'fanikishaapp',
     storageBucket: 'fanikishaapp.appspot.com',
+    androidClientId: '828413775508-dklghlkml89f37ingt9cc4nuf8pqph84.apps.googleusercontent.com',
     iosClientId: '828413775508-hg4bc02igggvg2h891muerbghmsq18p3.apps.googleusercontent.com',
     iosBundleId: 'com.example.fanikishaApp.RunnerTests',
   );

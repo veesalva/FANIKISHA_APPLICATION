@@ -1,11 +1,9 @@
-import 'package:fanikisha_app/screens/authetication/forget_password/otp_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-// this the screen for resetting password using email after user has selected reset
-// password option using email
-class ForgetPasswordMailScreen extends StatelessWidget {
-  const ForgetPasswordMailScreen({Key? key}) : super(key: key);
+
+import 'package:flutter/material.dart';
+// this is the page for resetting password using phone No:
+class ForgotPasswordPhoneNoScreen extends StatelessWidget {
+  const ForgotPasswordPhoneNoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +36,7 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 15.0),
                 const Text(
-                  "Enter Your Registered E-mail to reset Your Password",
+                  "Enter Your Registered Phone Number to reset Your Password",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -53,7 +51,7 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                       const TextField(
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email_outlined),
-                          labelText: 'Email',
+                          labelText: 'Phone Number',
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -64,8 +62,7 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                          //   go to otp screen to enter sent codes
-                            Get.to(()=> OTPScreen() );
+
                           },
                           child: const Text('Next'),
                         ),
@@ -81,3 +78,5 @@ class ForgetPasswordMailScreen extends StatelessWidget {
     );
   }
 }
+
+

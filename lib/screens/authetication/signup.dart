@@ -1,6 +1,12 @@
+import 'package:fanikisha_app/models/user_model.dart';
+import 'package:fanikisha_app/screens/authetication/forget_password/otp_screen.dart';
+import 'package:fanikisha_app/screens/authetication/login.dart';
+import 'package:fanikisha_app/screens/authetication/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
+// todo:perform validation  on the field inputs
 class SignUp extends StatefulWidget {
   @override
   _SignUpFormState createState() => _SignUpFormState();
@@ -8,21 +14,32 @@ class SignUp extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUp> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _repeatPasswordController =
-      TextEditingController();
 
-  String _fullname = '';
-  String _email = '';
-  String _password = '';
-  String _repeatPassword = '';
-  String _accountNumber = '';
+  // controller from the SignUpController
+  final controller = Get.put(SignUpController());
+
+
+  // field for toogle password
+  bool _obscureTextPassword = true;
+
+  bool _obscureTextRepeatPassword = true;
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       // Perform signup logic here
-      // For example, you can create an account with the provided information
-      print('Signup successful!');
+      //   // SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
+      // SignUpController.instance.phoneNumberAuthentication(controller.phoneNumber.text.trim());
+      // Get.to(const OTPScreen());
+
+      final user = UserModel(
+          fullName: controller.fullName.text.trim(),
+          email: controller.email.text.trim(),
+          password: controller.password.text.trim(),
+          bankAccountNumber: controller.bankAccountNumber.text.trim(),
+          phoneNumber: controller.phoneNumber.text.trim());
+         // create the user in the database
+         SignUpController.instance.createUser(user);
+    //
     }
   }
 
@@ -61,109 +78,80 @@ class _SignUpFormState extends State<SignUp> {
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                controller: controller.fullName,
                 decoration: const InputDecoration(
                   labelText: 'Full Name',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your full name';
-                  }
-                  return null;
-                },
-                onChanged: (value) {
-                  _fullname = value;
-                },
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                controller: controller.email,
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  // You can add more advanced email validation here
-                  return null;
-                },
-                onChanged: (value) {
-                  _email = value;
-                },
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                controller: controller.phoneNumber,
                 decoration: const InputDecoration(
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your account number';
-                  }
-                  // You can add more specific account number validation here
-                  return null;
-                },
-                onChanged: (value) {
-                  _accountNumber = value;
-                },
               ),
               const SizedBox(height: 16.0),
+              //   password text field
               TextFormField(
-                decoration: const InputDecoration(
+                controller: controller.password,
+                decoration: InputDecoration(
                   labelText: 'Password',
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureTextPassword
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureTextPassword = !_obscureTextPassword;
+                      });
+                    },
+                  ),
                 ),
-                obscureText: true,
-                controller: _passwordController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a password';
-                  }
-                  return null;
-                },
-                onChanged: (value) {
-                  _password = value;
-                },
+                obscureText: _obscureTextPassword,
+              ),
+
+              //  repeat password text field
+              const SizedBox(height: 16.0),
+              TextFormField(
+                controller: controller.repeatPassword,
+                decoration: InputDecoration(
+                    labelText: 'Repeat Password',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureTextRepeatPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureTextRepeatPassword =
+                          !_obscureTextRepeatPassword;
+                        });
+                      },
+                    )),
+                obscureText: _obscureTextRepeatPassword,
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Repeat Password',
-                  border: OutlineInputBorder(),
-                ),
-                obscureText: true,
-                controller: _repeatPasswordController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please repeat the password';
-                  }
-                  if (value != _passwordController.text) {
-                    return 'Passwords do not match';
-                  }
-                  return null;
-                },
-                onChanged: (value) {
-                  _repeatPassword = value;
-                },
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
+                controller: controller.bankAccountNumber,
                 decoration: const InputDecoration(
                   labelText: 'Bank Account Number',
                   border: OutlineInputBorder(),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your account number';
-                  }
-                  // You can add more specific account number validation here
-                  return null;
-                },
-                onChanged: (value) {
-                  _accountNumber = value;
-                },
               ),
               const SizedBox(height: 32.0),
               const Row(
@@ -196,7 +184,7 @@ class _SignUpFormState extends State<SignUp> {
                 onPressed: _submitForm,
                 child: const Text('Sign Up'),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               //divider codes
               const Row(children: <Widget>[
                 Expanded(
@@ -224,8 +212,40 @@ class _SignUpFormState extends State<SignUp> {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Already have an account?',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Login(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Log In',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
-
           ),
         ),
       ),

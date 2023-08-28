@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "828413775508-dklghlkml89f37ingt9cc4nuf8pqph84.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fanikisha_app",
+            "certificate_hash": "65bf2b2a318c6bb0ac9c21abefc792cce0d2a50e"
+          }
+        },
+        {
           "client_id": "828413775508-db5pcmf93p6h4cqb978gq28adnmtl0k3.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "828413775508-db5pcmf93p6h4cqb978gq28adnmtl0k3.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "828413775508-hg4bc02igggvg2h891muerbghmsq18p3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fanikishaApp.RunnerTests"
+              }
             }
           ]
         }
