@@ -14,18 +14,44 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          width: 330, // Adjust the width of the container as per your requirements
-          height: 10, // Adjust the height of the container as per your requirements
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), // Rounded corners
-            color: Colors.green, // Green box color
-          ),
-          child: const LinearProgressIndicator(
-            backgroundColor: Colors.white, // Background color of the progress bar
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.green), // Color of the progress bar
-            value: 0.5, // Set the progress value between 0.0 and 1.0
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 200, // Adjust the width of the container as per your requirements
+              height: 80, // Adjust the height of the container as per your requirements
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10), // Rounded corners
+                color: Colors.green, // Green box color
+              ),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LinearProgressIndicator(
+                    backgroundColor: Colors.white, // Background color of the progress bar
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue), // Color of the progress bar
+                    value: 0.5, // Set the progress value between 0.0 and 1.0
+                  ),
+                  SizedBox(height: 5), // Add some spacing between the progress bar and the text
+                  Text(
+                    'Shopping',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 5), // Add some spacing between the text and the percentage
+                  Text(
+                    '50%', // Replace with the actual progress percentage
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
