@@ -9,7 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) => Get.put(AutheticationRepository()));
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,14 +17,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  GetMaterialApp(
+    return GetMaterialApp(
       defaultTransition: Transition.leftToRightWithFade,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: Colors.green,
           secondary: Colors.blue,
-        )
+        ),
       ),
       transitionDuration: const Duration(milliseconds: 500),
       home: SplashScreen(),
