@@ -1,3 +1,5 @@
+import 'package:fanikisha_app/screens/GoalList.dart';
+import 'package:fanikisha_app/screens/MakeSavings.dart';
 import 'package:fanikisha_app/screens/authetication/login.dart';
 import 'package:fanikisha_app/screens/authetication/signup.dart';
 import 'package:fanikisha_app/screens/goaldetails.dart';
@@ -128,7 +130,7 @@ class HomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => GoalDetails(),
+                        builder: (context) =>SignUp(),
                       ),
                     );
                   },
