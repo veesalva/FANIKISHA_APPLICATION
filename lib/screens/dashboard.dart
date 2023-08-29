@@ -1,4 +1,3 @@
-import 'package:fanikisha_app/repository/user_repository.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:fanikisha_app/screens/create_goal.dart';
 import 'package:flutter/material.dart';
@@ -15,31 +14,18 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                // sign out
-                AutheticationRepository.instance.logout();
-              },
-              child: const Text("Logout"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // sign out
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return CreateGoal();
-                    },
-                  ),
-                );
-              },
-              child: const Text("Logout"),
-            ),
-          ],
+        child: Container(
+          width: 330, // Adjust the width of the container as per your requirements
+          height: 10, // Adjust the height of the container as per your requirements
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10), // Rounded corners
+            color: Colors.green, // Green box color
+          ),
+          child: const LinearProgressIndicator(
+            backgroundColor: Colors.white, // Background color of the progress bar
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.green), // Color of the progress bar
+            value: 0.5, // Set the progress value between 0.0 and 1.0
+          ),
         ),
       ),
     );
