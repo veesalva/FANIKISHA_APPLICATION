@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_connect.dart';
 
 class GoalList extends StatefulWidget {
   const GoalList({super.key});

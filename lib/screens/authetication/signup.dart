@@ -87,6 +87,7 @@ class _SignUpFormState extends State<SignUp> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: controller.email,
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
@@ -95,6 +96,7 @@ class _SignUpFormState extends State<SignUp> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: controller.phoneNumber,
+                keyboardType: TextInputType.phone,
                 decoration: const InputDecoration(
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
@@ -148,6 +150,7 @@ class _SignUpFormState extends State<SignUp> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: controller.bankAccountNumber,
+                keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   labelText: 'Bank Account Number',
                   border: OutlineInputBorder(),
