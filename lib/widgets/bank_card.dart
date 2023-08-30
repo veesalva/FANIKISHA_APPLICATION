@@ -8,11 +8,11 @@ class BankCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(25),
+      margin: const EdgeInsets.all(25),
       width: 330,
       height: 180,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
           colors: [Colors.black, Colors.green],
@@ -74,7 +74,7 @@ class BankCard extends StatelessWidget {
                   ),
                   Text(
                     " ${cardHolder}",
-                    style: TextStyle(color: Colors.white, fontSize: 17),
+                    style: const TextStyle(color: Colors.white, fontSize: 17),
                   ),
                 ]),
                 Column(children: [
@@ -84,10 +84,10 @@ class BankCard extends StatelessWidget {
                   ),
                   Text(
                     " ${cardHolder}",
-                    style: TextStyle(color: Colors.white, fontSize: 17),
+                    style: const TextStyle(color: Colors.white, fontSize: 17),
                   ),
                 ]),
-                Column(children: [
+                const Column(children: [
                   Icon(Icons.toggle_on_outlined,color: Colors.white,),
                   Text(
                     " Show Card",
