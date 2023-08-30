@@ -42,6 +42,8 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   firebase_auth: ^4.8.0
   cloud_firestore: ^4.9.0
+  persistent_bottom_nav_bar: any
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +74,7 @@ flutter:
   assets:
     - images/saving.jpg
     - images/logo.png
+    - images/profile.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

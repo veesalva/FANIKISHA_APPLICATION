@@ -1,9 +1,8 @@
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
-import 'package:fanikisha_app/screens/create_goal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../models/user_model.dart';
+import '../widgets/bank_card.dart';
 
 class DashboardPage extends StatelessWidget {
   DashboardPage({super.key});
@@ -13,46 +12,187 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Column(
           children: [
-            Container(
-              width: 200, // Adjust the width of the container as per your requirements
-              height: 80, // Adjust the height of the container as per your requirements
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), // Rounded corners
-                color: Colors.green, // Green box color
-              ),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LinearProgressIndicator(
-                    backgroundColor: Colors.white, // Background color of the progress bar
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue), // Color of the progress bar
-                    value: 0.5, // Set the progress value between 0.0 and 1.0
-                  ),
-                  SizedBox(height: 5), // Add some spacing between the progress bar and the text
-                  Text(
-                    'Shopping',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 5), // Add some spacing between the text and the percentage
-                  Text(
-                    '50%', // Replace with the actual progress percentage
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+            Text(
+              "FANIKISHA",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
+            ),
+            Text(
+              "level up your saving habit",
+              style: TextStyle(color: Colors.black),
             ),
           ],
         ),
+      ),
+      body: ListView(
+        children: [
+          BankCard(cardHolder: "John Doe"),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    "50000",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Current Balance",
+                    style: TextStyle(color: Colors.grey),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    "50000",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Income",
+                    style: TextStyle(color: Colors.grey),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    "50000",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Outcome",
+                    style: TextStyle(color: Colors.grey),
+                  )
+                ],
+              ),
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(28, 20, 10, 5),
+            child: const LinearProgressIndicator(
+              minHeight: 8,
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              value: 50 / 100,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(22, 5, 13, 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Weekly payment limit",
+                  style: TextStyle(color: Colors.grey, fontSize: 17),
+                ),
+                Text(
+                  "50000/60000",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Row(
+              children: [
+                Icon(Icons.save_rounded),
+                Text("Save"),
+                Spacer(),
+                Icon(Icons.next_plan_rounded),
+                Text("Choose Plan"),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+            child: const Text(
+              "Usage Statistics",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: ListTile(
+              onTap: () {},
+              tileColor: Colors.grey.shade400,
+              leading: Container(
+                height: double.infinity,
+                child: Icon(Icons.shopping_cart),
+              ),
+              title: LinearProgressIndicator(
+                minHeight: 8,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                value: 53 / 100,
+              ),
+              subtitle: Text("Shopping"),
+              trailing: Text(
+                "53%",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: ListTile(
+              onTap: () {},
+              tileColor: Colors.grey.shade400,
+              leading: Container(
+                height: double.infinity,
+                child: Icon(Icons.shopping_cart),
+              ),
+              title: LinearProgressIndicator(
+                minHeight: 8,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                value: 53 / 100,
+              ),
+              subtitle: Text("Shopping"),
+              trailing: Text(
+                "53%",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: ListTile(
+              onTap: () {},
+              tileColor: Colors.grey.shade400,
+              leading: Container(
+                height: double.infinity,
+                child: Icon(Icons.shopping_cart),
+              ),
+              title: LinearProgressIndicator(
+                minHeight: 8,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                value: 53 / 100,
+              ),
+              subtitle: Text("Shopping"),
+              trailing: Text(
+                "53%",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+
+
+          ),
+        ],
       ),
     );
   }

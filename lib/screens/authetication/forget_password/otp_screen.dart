@@ -43,8 +43,8 @@ class OTPScreen extends StatelessWidget {
                   color: Colors.black, fontWeight: FontWeight.bold),
               filled: true,
               onSubmit: (otp) {
+                // todo it does verify automatically until user click the next button
                 otpValue = otp;
-                controller.verifyOTP(otp);
               },
             ),
             const SizedBox(
