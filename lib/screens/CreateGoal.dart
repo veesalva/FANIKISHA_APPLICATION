@@ -191,7 +191,7 @@ class _CreateGoalState extends State<CreateGoal> {
             width: 25,
             child: ElevatedButton(
               onPressed: () {},
-              child: Text("ADD GOAL"),
+              child: const Text("ADD GOAL"),
             ),
           ),
         )
