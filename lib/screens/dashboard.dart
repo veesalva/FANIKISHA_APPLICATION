@@ -11,7 +11,7 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Column(
@@ -27,9 +27,173 @@ class DashboardPage extends StatelessWidget {
           ],
         ),
       ),
-      body: BankCard(
-        cardHolder: "Brian Smith",
-      )
+      body: ListView(
+        children: [
+          BankCard(cardHolder: "John Doe"),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    "50000",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Current Balance",
+                    style: TextStyle(color: Colors.grey),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    "50000",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Income",
+                    style: TextStyle(color: Colors.grey),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    "50000",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Outcome",
+                    style: TextStyle(color: Colors.grey),
+                  )
+                ],
+              ),
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(28, 20, 10, 5),
+            child: const LinearProgressIndicator(
+              minHeight: 8,
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              value: 50 / 100,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(22, 5, 13, 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Weekly payment limit",
+                  style: TextStyle(color: Colors.grey, fontSize: 17),
+                ),
+                Text(
+                  "50000/60000",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Row(
+              children: [
+                Icon(Icons.save_rounded),
+                Text("Save"),
+                Spacer(),
+                Icon(Icons.next_plan_rounded),
+                Text("Choose Plan"),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 20, 20, 5),
+            child: const Text(
+              "Usage Statistics",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: ListTile(
+              onTap: () {},
+              tileColor: Colors.grey.shade400,
+              leading: Container(
+                height: double.infinity,
+                child: Icon(Icons.shopping_cart),
+              ),
+              title: LinearProgressIndicator(
+                minHeight: 8,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                value: 53 / 100,
+              ),
+              subtitle: Text("Shopping"),
+              trailing: Text(
+                "53%",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: ListTile(
+              onTap: () {},
+              tileColor: Colors.grey.shade400,
+              leading: Container(
+                height: double.infinity,
+                child: Icon(Icons.shopping_cart),
+              ),
+              title: LinearProgressIndicator(
+                minHeight: 8,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                value: 53 / 100,
+              ),
+              subtitle: Text("Shopping"),
+              trailing: Text(
+                "53%",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            child: ListTile(
+              onTap: () {},
+              tileColor: Colors.grey.shade400,
+              leading: Container(
+                height: double.infinity,
+                child: Icon(Icons.shopping_cart),
+              ),
+              title: LinearProgressIndicator(
+                minHeight: 8,
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                value: 53 / 100,
+              ),
+              subtitle: Text("Shopping"),
+              trailing: Text(
+                "53%",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+
+
+          ),
+        ],
+      ),
     );
   }
 }
