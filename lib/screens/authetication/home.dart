@@ -4,6 +4,7 @@ import 'package:fanikisha_app/screens/authetication/login.dart';
 import 'package:fanikisha_app/screens/authetication/signup.dart';
 import 'package:fanikisha_app/screens/dashboard.dart';
 import 'package:fanikisha_app/screens/goaldetails.dart';
+import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
 
 import 'package:flutter/material.dart';
 
