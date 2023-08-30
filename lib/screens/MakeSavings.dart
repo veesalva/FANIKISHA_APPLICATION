@@ -46,6 +46,7 @@ class MakeSavings extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   TextFormField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       label: Text("Enter Amount"),
                       border: OutlineInputBorder(),
