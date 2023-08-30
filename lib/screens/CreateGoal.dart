@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 enum GoalPriorityEnum { High, Medium, Low }
 
 class CreateGoal extends StatefulWidget {
@@ -93,7 +93,7 @@ class _CreateGoalState extends State<CreateGoal> {
           )),
         ),
         Container(
-          margin: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(15),
           child: const Text(
             "Goal Priority",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -105,7 +105,7 @@ class _CreateGoalState extends State<CreateGoal> {
               child: RadioListTile<GoalPriorityEnum>(
                   hoverColor: Colors.green,
                   activeColor: Colors.green,
-                  contentPadding: const EdgeInsets.all(0.0),
+                  contentPadding: const EdgeInsets.only(left: 20.0),
                   value: GoalPriorityEnum.High,
                   groupValue: _goalPriorityEnum,
                   dense: true,
@@ -123,7 +123,7 @@ class _CreateGoalState extends State<CreateGoal> {
               child: RadioListTile<GoalPriorityEnum>(
                   hoverColor: Colors.green,
                   activeColor: Colors.green,
-                  contentPadding: const EdgeInsets.all(0.0),
+                  contentPadding: const EdgeInsets.only(left:4.0),
                   value: GoalPriorityEnum.Medium,
                   groupValue: _goalPriorityEnum,
                   dense: true,
@@ -141,7 +141,7 @@ class _CreateGoalState extends State<CreateGoal> {
               child: RadioListTile<GoalPriorityEnum>(
                   hoverColor: Colors.green,
                   activeColor: Colors.green,
-                  contentPadding: const EdgeInsets.all(0.0),
+                  contentPadding: const EdgeInsets.only(left: 2.0),
                   value: GoalPriorityEnum.Low,
                   groupValue: _goalPriorityEnum,
                   dense: true,
@@ -156,6 +156,44 @@ class _CreateGoalState extends State<CreateGoal> {
                   }),
             ),
           ],
+        ),
+        Container(
+          margin: const EdgeInsets.all(12),
+          child: const Text(
+            "Goal Duration",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Row(
+            children: [
+              Column(
+                children: [
+                  Text('From:',style: TextStyle(fontSize:14 ,fontWeight: FontWeight.bold),),
+                  SizedBox(height: 20),
+          ],
+              ),
+              SizedBox(width: 180),
+              Column(
+                children: [
+                  Text('To:',style: TextStyle(fontSize:14 ,fontWeight: FontWeight.bold),),
+                  SizedBox(height: 3),
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 20,),
+        Padding(
+          padding: const EdgeInsets.all(60.0),
+          child: SizedBox(
+            width: 25,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text("ADD GOAL"),
+            ),
+          ),
         )
       ]),
     );
