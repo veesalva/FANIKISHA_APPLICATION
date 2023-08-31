@@ -20,7 +20,7 @@ class _CreateGoalState extends State<CreateGoal> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
         centerTitle: true,
         title: const Column(
           children: [
@@ -29,7 +29,7 @@ class _CreateGoalState extends State<CreateGoal> {
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w900,
-                color: Colors.green,
+                color: Colors.white,
               ),
             ),
             Text(
