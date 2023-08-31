@@ -1,5 +1,7 @@
+import 'package:fanikisha_app/screens/saving_plan_options.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 enum GoalPriorityEnum { High, Medium, Low }
 
 class CreateGoal extends StatefulWidget {
@@ -123,7 +125,7 @@ class _CreateGoalState extends State<CreateGoal> {
               child: RadioListTile<GoalPriorityEnum>(
                   hoverColor: Colors.green,
                   activeColor: Colors.green,
-                  contentPadding: const EdgeInsets.only(left:4.0),
+                  contentPadding: const EdgeInsets.only(left: 4.0),
                   value: GoalPriorityEnum.Medium,
                   groupValue: _goalPriorityEnum,
                   dense: true,
@@ -170,27 +172,41 @@ class _CreateGoalState extends State<CreateGoal> {
             children: [
               Column(
                 children: [
-                  Text('From:',style: TextStyle(fontSize:14 ,fontWeight: FontWeight.bold),),
+                  Text(
+                    'From:',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
                   SizedBox(height: 20),
-          ],
+                ],
               ),
               SizedBox(width: 180),
               Column(
                 children: [
-                  Text('To:',style: TextStyle(fontSize:14 ,fontWeight: FontWeight.bold),),
+                  Text(
+                    'To:',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
                   SizedBox(height: 3),
                 ],
               ),
             ],
           ),
         ),
-        const SizedBox(height: 20,),
+        const SizedBox(
+          height: 20,
+        ),
         Padding(
           padding: const EdgeInsets.all(60.0),
           child: SizedBox(
             width: 26,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SavingPlanOptions(),
+                    ));
+              },
               child: const Text("ADD GOAL"),
             ),
           ),
