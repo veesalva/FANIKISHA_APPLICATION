@@ -54,7 +54,7 @@ class _CreateGoalState extends State<CreateGoal> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(15.0),
           child: Form(
               child: Column(
             children: [
@@ -179,12 +179,12 @@ class _CreateGoalState extends State<CreateGoal> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text("From"),
               ),
               Container(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: DateTimeField(
@@ -203,12 +203,12 @@ class _CreateGoalState extends State<CreateGoal> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Text("To"),
               ),
               Container(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 decoration: const BoxDecoration(
 
                 ),

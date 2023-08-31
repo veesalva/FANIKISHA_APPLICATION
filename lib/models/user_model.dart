@@ -39,4 +39,6 @@ class UserModel {
         bankAccountNumber: data["BankAccountNumber"],
         phoneNumber: data["PhoneNumber"]);
   }
+
+
 }
