@@ -1,3 +1,4 @@
+import 'package:date_field/date_field.dart';
 import 'package:fanikisha_app/screens/saving_plan_options.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +14,10 @@ class CreateGoal extends StatefulWidget {
 
 class _CreateGoalState extends State<CreateGoal> {
   GoalPriorityEnum? _goalPriorityEnum;
+
+  // field for selected dates from an to
+  DateTime fromSelectedDate = DateTime.now();
+  DateTime toSelectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -168,6 +173,55 @@ class _CreateGoalState extends State<CreateGoal> {
         ),
         const SizedBox(
           height: 20,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("From"),
+              ),
+              Container(
+                padding: EdgeInsets.all(10.0),
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: DateTimeField(
+                    onDateSelected: (value) {
+                      setState(() {
+                        fromSelectedDate = value;
+                      });
+                    },
+                    selectedDate: fromSelectedDate),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("To"),
+              ),
+              Container(
+                padding: EdgeInsets.all(10.0),
+                decoration: const BoxDecoration(
+
+                ),
+                child: DateTimeField(
+                    onDateSelected: (value) {
+                      setState(() {
+                        toSelectedDate = value;
+                      });
+                    },
+                    selectedDate: toSelectedDate),
+              ),
+            ],
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(60.0),
