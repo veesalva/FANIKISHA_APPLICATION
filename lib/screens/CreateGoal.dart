@@ -166,32 +166,6 @@ class _CreateGoalState extends State<CreateGoal> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Row(
-            children: [
-              Column(
-                children: [
-                  Text(
-                    'From:',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 20),
-                ],
-              ),
-              SizedBox(width: 180),
-              Column(
-                children: [
-                  Text(
-                    'To:',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 3),
-                ],
-              ),
-            ],
-          ),
-        ),
         const SizedBox(
           height: 20,
         ),
