@@ -13,7 +13,8 @@ class CreateGoal extends StatefulWidget {
 
 class _CreateGoalState extends State<CreateGoal> {
   GoalPriorityEnum? _goalPriorityEnum;
-  final TextEditingController _date = TextEditingController();
+  final TextEditingController _startdate = TextEditingController();
+  final TextEditingController _enddate = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -202,11 +203,11 @@ class _CreateGoalState extends State<CreateGoal> {
                   width: 120,
                   height: 40,
                   child: TextFormField(
-                      controller: _date,
+                      controller: _startdate,
                       decoration: const InputDecoration(
                         labelText: "Start Date",
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
                         ),
                       ),
                       keyboardType: TextInputType.datetime,
@@ -218,25 +219,24 @@ class _CreateGoalState extends State<CreateGoal> {
                           lastDate: DateTime(2100),
                         );
                         setState(() {
-                          _date.text =
-                              DateFormat('yyyy-MM-dd').format(pickeddate!);
+                          _startdate.text =
+                              DateFormat('dd-MM-yyyy').format(pickeddate!);
                         });
                       }),
                 ),
               ),
-              const SizedBox(
-                  width: 100),
+              const SizedBox(width: 100),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                   width: 120,
                   height: 40,
                   child: TextFormField(
-                      controller: _date,
+                      controller: _enddate,
                       decoration: const InputDecoration(
                         labelText: "End Date",
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
                         ),
                       ),
                       keyboardType: TextInputType.datetime,
@@ -248,8 +248,9 @@ class _CreateGoalState extends State<CreateGoal> {
                           lastDate: DateTime(2100),
                         );
                         setState(() {
-                          _date.text =
-                              DateFormat('yyyy-MM-dd').format(pickeddate!);
+                          _enddate.text =
+                              DateFormat('dd-MM-yyyy').format(pickeddate!);
+                          if(_enddate.text != _startdate.text );
                         });
                       }),
                 ),
