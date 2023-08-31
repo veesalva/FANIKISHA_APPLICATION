@@ -1,9 +1,6 @@
 import 'package:fanikisha_app/screens/CreateGoal.dart';
 import 'package:fanikisha_app/screens/authetication/login.dart';
 import 'package:fanikisha_app/screens/authetication/signup.dart';
-import 'package:fanikisha_app/screens/dashboard.dart';
-import 'package:fanikisha_app/screens/goaldetails.dart';
-import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -39,7 +36,6 @@ class HomePage extends StatelessWidget {
                   const SizedBox(
                     height: 50.0,
                   ),
-                ),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -57,6 +53,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
+                ),
                   const Text(
                     'Weka akiba kwa muda utakao.',
                     style: TextStyle(
