@@ -207,7 +207,7 @@ class _CreateGoalState extends State<CreateGoal> {
                       decoration: const InputDecoration(
                         labelText: "Start Date",
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
                       keyboardType: TextInputType.datetime,
@@ -236,7 +236,7 @@ class _CreateGoalState extends State<CreateGoal> {
                       decoration: const InputDecoration(
                         labelText: "End Date",
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
                       keyboardType: TextInputType.datetime,
@@ -261,9 +261,10 @@ class _CreateGoalState extends State<CreateGoal> {
             height: 4,
           ),
           Padding(
-            padding: const EdgeInsets.all(60.0),
+            padding: const EdgeInsets.all(70.0),
             child: SizedBox(
-              width: 26,
+              width: 80,
+              height: 40,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
