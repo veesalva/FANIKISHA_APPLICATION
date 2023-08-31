@@ -188,7 +188,7 @@ class _CreateGoalState extends State<CreateGoal> {
         Padding(
           padding: const EdgeInsets.all(60.0),
           child: SizedBox(
-            width: 25,
+            width: 26,
             child: ElevatedButton(
               onPressed: () {},
               child: const Text("ADD GOAL"),
