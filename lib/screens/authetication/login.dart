@@ -25,7 +25,8 @@ class _LoginState extends State<Login> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       // Perform signup logic here
-      SignInController.instance.signInUser(
+      print("hello sigin");
+      controller.signInUser(
           controller.email.text.trim(), controller.password.text.trim());
     }
   }
@@ -112,7 +113,12 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        _submitForm;
+                        if (_formKey.currentState!.validate()) {
+                          // Perform signup logic here
+                          print("hello sigin");
+                          controller.signInUser(
+                              controller.email.text.trim(), controller.password.text.trim());
+                        }
                       },
                       child: const Text('Login'),
                     ),

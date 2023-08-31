@@ -1,15 +1,18 @@
 import 'package:fanikisha_app/screens/Viewprofile.dart';
+import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Settings extends StatefulWidget {
-  Settings({super.key});
+ const Settings({super.key});
 
   @override
   State<Settings> createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,20 +71,28 @@ class _SettingsState extends State<Settings> {
             margin: const EdgeInsets.all(10),
             child: Column(
               children: [
-                const ListTile(
-                  leading: CircleAvatar(
+                ListTile(
+                  leading: const CircleAvatar(
                     radius: 25,
                     child: Icon(FontAwesomeIcons.user),
                   ),
-                  title: Text(
+                  onTap: () {
+                    //   move the user to change his or her details
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const ViewProfile();
+                      },
+                    ));
+                  },
+                  title: const Text(
                     "Account",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     "Make Changes to Your Account",
                     style: TextStyle(),
                   ),
-                  trailing: Icon(Icons.arrow_forward_ios),
+                  trailing: const Icon(Icons.arrow_forward_ios),
                 ),
                 const SizedBox(
                   height: 10,
@@ -125,6 +136,7 @@ class _SettingsState extends State<Settings> {
                 ListTile(
                   onTap: () {
                     //   todo: Log out codes here
+                    AutheticationRepository.instance.logout();
                   },
                   leading: const CircleAvatar(
                     radius: 25,
@@ -146,22 +158,19 @@ class _SettingsState extends State<Settings> {
               ],
             ),
           ),
-
           Container(
             margin: const EdgeInsets.all(20),
             child: const Text(
               "More",
               style: TextStyle(color: Colors.grey, fontSize: 20),
             ),
-
           ),
           const Card(
-            margin:EdgeInsets.all(10),
+            margin: EdgeInsets.all(10),
             elevation: 5,
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: Column(
-
                 children: [
                   ListTile(
                     leading: CircleAvatar(
@@ -170,7 +179,8 @@ class _SettingsState extends State<Settings> {
                     ),
                     title: Text(
                       "About Us",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
                   ),
@@ -184,7 +194,8 @@ class _SettingsState extends State<Settings> {
                     ),
                     title: Text(
                       "Help & Support",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
                   ),
@@ -198,7 +209,8 @@ class _SettingsState extends State<Settings> {
                     ),
                     title: Text(
                       "Terms & Conditions",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
                   ),
