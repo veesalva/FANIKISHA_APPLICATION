@@ -4,15 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Settings extends StatefulWidget {
- const Settings({super.key});
+  const Settings({super.key});
 
   @override
   State<Settings> createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,10 +131,32 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(
                   height: 10,
                 ),
+                // log out ListTile
                 ListTile(
                   onTap: () {
-                    //   todo: Log out codes here
-                    AutheticationRepository.instance.logout();
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        backgroundColor: Colors.black,
+                        title: const Text('Log out',
+                            style: TextStyle(color: Colors.white)),
+                        content: const Text(
+                          'Log out off your account?',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () =>
+                                AutheticationRepository.instance.logout(),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
                   },
                   leading: const CircleAvatar(
                     radius: 25,
@@ -152,6 +172,7 @@ class _SettingsState extends State<Settings> {
                   ),
                   trailing: const Icon(Icons.arrow_forward_ios),
                 ),
+
                 const SizedBox(
                   height: 10,
                 )

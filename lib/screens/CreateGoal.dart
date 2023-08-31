@@ -1,3 +1,4 @@
+import 'package:date_field/date_field.dart';
 import 'package:fanikisha_app/screens/saving_plan_options.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +16,10 @@ class _CreateGoalState extends State<CreateGoal> {
   GoalPriorityEnum? _goalPriorityEnum;
   final TextEditingController _startdate = TextEditingController();
   final TextEditingController _enddate = TextEditingController();
+
+  // field for selected dates from an to
+  DateTime fromSelectedDate = DateTime.now();
+  DateTime toSelectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
