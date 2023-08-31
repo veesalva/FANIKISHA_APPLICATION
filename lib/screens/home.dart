@@ -39,8 +39,18 @@ class HomePage extends StatelessWidget {
                   const SizedBox(
                     height: 50.0,
                   ),
-                  const Text(
-                    'Fanikisha mipango yako nasi. ',
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CreateGoal(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Sign up',
                     style: TextStyle(
                       fontSize: 23,
                       fontWeight: FontWeight.bold,
