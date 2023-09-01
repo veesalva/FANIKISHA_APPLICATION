@@ -1,3 +1,5 @@
+import 'package:fanikisha_app/screens/CreateGoal.dart';
+import 'package:fanikisha_app/screens/goaldetails.dart';
 import 'package:flutter/material.dart';
 
 class GoalList extends StatefulWidget {
@@ -28,14 +30,21 @@ class _GoalListState extends State<GoalList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const CreateGoal();
+              },
+            ),
+          );
         },
-        child:const Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: ListView(
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(20,70,20,10),
+            margin: const EdgeInsets.fromLTRB(20, 70, 20, 10),
             child: const Text(
               "Goals",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
@@ -112,17 +121,24 @@ class Goal extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
             onTap: () {
-
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const GoalDetails();
+                  },
+                ),
+              );
             },
             leading: Container(
               height: double.infinity,
-              child:  Icon(goalIcon, color:goalValue!=100? Colors.red:Colors.green),
+              child: Icon(goalIcon,
+                  color: goalValue != 100 ? Colors.red : Colors.green),
             ),
             title: Text(goalName),
             subtitle: Column(
               children: [
                 Text(goalDuration),
-
               ],
             ),
             trailing: Text(goalAmount),
