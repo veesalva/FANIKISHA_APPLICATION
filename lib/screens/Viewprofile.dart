@@ -23,15 +23,17 @@ class ViewProfile extends StatelessWidget {
                   image: AssetImage("images/profile.jpg"), fit: BoxFit.cover),
             ),
           ),
-          Align(
-            child: Text("Victoria Kundi"),
-            alignment: Alignment.center,
-          ),
-          Align(
-            child: Text("victoriakundi@gmail.com"),
-            alignment: Alignment.center,
-          ),
+
           SizedBox(height: 10),
+          Container(
+            margin: EdgeInsets.fromLTRB(10,5,10,5),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                labelText: "First Name",
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
           Container(
             margin: EdgeInsets.fromLTRB(10,5,10,5),
             child: TextFormField(
