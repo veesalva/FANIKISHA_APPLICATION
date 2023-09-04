@@ -127,42 +127,42 @@ class DashboardPage extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: ListTile(
               onTap: () {},
               tileColor: Colors.grey.shade400,
               leading: Container(
                 height: double.infinity,
-                child: Icon(Icons.shopping_cart),
+                child: const Icon(Icons.shopping_cart),
               ),
-              title: LinearProgressIndicator(
+              title: const LinearProgressIndicator(
                 minHeight: 8,
                 borderRadius: BorderRadius.all(Radius.circular(8)),
-                value: 53 / 100,
+                value: 70 / 100,
               ),
-              subtitle: Text("Shopping"),
-              trailing: Text(
+              subtitle: const Text("Shopping"),
+              trailing: const Text(
                 "53%",
                 style: TextStyle(fontSize: 20),
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: ListTile(
               onTap: () {},
               tileColor: Colors.grey.shade400,
               leading: Container(
                 height: double.infinity,
-                child: Icon(Icons.shopping_cart),
+                child: const Icon(Icons.electric_bolt_rounded),
               ),
-              title: LinearProgressIndicator(
+              title: const LinearProgressIndicator(
                 minHeight: 8,
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 value: 53 / 100,
               ),
-              subtitle: Text("Shopping"),
-              trailing: Text(
+              subtitle: const Text("Electronics"),
+              trailing: const Text(
                 "53%",
                 style: TextStyle(fontSize: 20),
               ),
@@ -170,27 +170,30 @@ class DashboardPage extends StatelessWidget {
 
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+            margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: ListTile(
               onTap: () {},
               tileColor: Colors.grey.shade400,
               leading: Container(
                 height: double.infinity,
-                child: Icon(Icons.shopping_cart),
+                child: const Icon(Icons.shopping_cart),
               ),
-              title: LinearProgressIndicator(
+              title: const LinearProgressIndicator(
                 minHeight: 8,
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 value: 53 / 100,
               ),
-              subtitle: Text("Shopping"),
-              trailing: Text(
+              subtitle: const Text("Shopping"),
+              trailing: const Text(
                 "53%",
                 style: TextStyle(fontSize: 20),
               ),
             ),
 
 
+          ),
+          const SizedBox(
+            height: 20,
           ),
         ],
       ),
