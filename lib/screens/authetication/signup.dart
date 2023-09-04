@@ -55,7 +55,7 @@ class _SignUpFormState extends State<SignUp> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
             ),
             Text(
-              "level up your saving habit",
+              "Level up your saving habit",
               style: TextStyle(color: Colors.black),
             ),
           ],
@@ -69,7 +69,7 @@ class _SignUpFormState extends State<SignUp> {
             children: [
               Text(
                 "Let's get you started".toUpperCase(),
-                style: const TextStyle(color: Colors.black54),
+                style: const TextStyle(color: Colors.black54,fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 16.0),
               const Text(
@@ -169,13 +169,13 @@ class _SignUpFormState extends State<SignUp> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.0, 8.0, 0, 0),
                         child: Text(
-                          "By clicking on ‘sign up’, you’re agreeing to the  ",
+                          "By clicking on ‘Sign Up’, you’re agreeing to the    ",
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.0, 0, 0, 8),
                         child: Text(
-                          "Chunky app Terms of Service and Privacy Policy  ",
+                          "Fanikisha Terms of Service and Privacy Policy.  ",
                         ),
                       ),
                     ],
@@ -207,10 +207,13 @@ class _SignUpFormState extends State<SignUp> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Icon(FontAwesomeIcons.google),
+                    FaIcon(
+                      FontAwesomeIcons.google,
+                    color: Color.fromRGBO(0x34, 0xa8, 0x53, 1.0)
+                                      ),
                     Text(
                       "Login with Google",
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Colors.black54),
                     ),
                   ],
                 ),
@@ -240,7 +243,7 @@ class _SignUpFormState extends State<SignUp> {
                     child: const Text(
                       'Log In',
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.green,
                         decoration: TextDecoration.underline,
                         fontSize: 16,
                       ),
