@@ -47,7 +47,7 @@ app.get('/users', function (req,res){
 
     });
 })
-
+//api to get user with an id
 app.get('/user/:id', function (req,res){
     let id = req.params.id;
     if (!id){
@@ -89,3 +89,19 @@ app.post('/users', (req, res) => {
     res.status(201).json({ message: 'User saved successfully', userId: result.insertId });
   });
 });
+
+app.get('/users', function (req,res){
+    db.query('SELECT * FROM users', function (error, results, fields ){
+        if (!error){
+            return res.send({
+                error: false,
+                data: results,
+                message: 'users list.'
+            });
+        } else {
+            throw error;
+        }
+
+    });
+})
+//api to login user

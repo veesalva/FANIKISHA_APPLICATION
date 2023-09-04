@@ -4,6 +4,8 @@ import 'package:fanikisha_app/models/user_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../constant/Constant.dart';
+
 // this is to perform database  operations on the user
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
@@ -30,8 +32,7 @@ class UserRepository extends GetxController {
 
 //   create user in a database
   Future<void> createUser(UserModel user) async {
-    // todo replace the ip address
-    final String apiUrl = '192.168.137.1:5000/users'; // Replace with your API endpoint
+    final String apiUrl = 'http://'+Constant.ipAddress+":5000/users";
 
     final Map<String, dynamic> data = user.toJson();
 
