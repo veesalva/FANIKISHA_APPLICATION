@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 // this is to perform database  operations on the user
 class UserRepository extends GetxController {
-  static UserRepository get instance => Get.find();
+ /* static UserRepository get instance => Get.find();
 
 //   database instance
   final _db = FirebaseFirestore.instance;
@@ -47,5 +47,7 @@ class UserRepository extends GetxController {
     final userData =
         snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
     return userData;
-  }
+  }*/
+
+
 }

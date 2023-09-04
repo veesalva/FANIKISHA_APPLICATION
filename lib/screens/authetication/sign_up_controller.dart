@@ -29,7 +29,7 @@ class SignUpController extends GetxController {
   }
 
   Future<void> createUser(UserModel user) async {
-   await  userRepository.createUser(user);
+   // await  userRepository.createUser(user);
    phoneNumberAuthentication(user.phoneNumber);
    registerUser(user.email, user.password);
   }
