@@ -35,7 +35,6 @@ class _SignUpFormState extends State<SignUp> {
           fullName: controller.fullName.text.trim(),
           email: controller.email.text.trim(),
           password: controller.password.text.trim(),
-          bankAccountNumber: controller.bankAccountNumber.text.trim(),
           phoneNumber: controller.phoneNumber.text.trim());
          // create the user in the database
          SignUpController.instance.createUser(user);
@@ -146,15 +145,6 @@ class _SignUpFormState extends State<SignUp> {
                       },
                     )),
                 obscureText: _obscureTextRepeatPassword,
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: controller.bankAccountNumber,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Bank Account Number',
-                  border: OutlineInputBorder(),
-                ),
               ),
               const SizedBox(height: 32.0),
               const Row(
