@@ -90,18 +90,27 @@ app.post('/users', (req, res) => {
   });
 });
 
-app.get('/users', function (req,res){
-    db.query('SELECT * FROM users', function (error, results, fields ){
-        if (!error){
-            return res.send({
-                error: false,
-                data: results,
-                message: 'users list.'
-            });
-        } else {
-            throw error;
-        }
-
-    });
-})
 //api to login user
+app.post('/login', (req, res) => {
+  const user = req.body; // Assuming the request body contains user data
+  // get the user from the database
+  db.query('SELECT * FROM users WHERE email=? AND password=?', [email, password], function (error, results, fields) {
+    if (!error) {
+      if (results.length > 0) {
+        return res.send({
+          error: false,
+          data: results[0],
+          message: 'User authenticated successfully.'
+        });
+      } else {
+        return res.status(401).send({
+          error: true,
+          message: 'Authentication failed. Email or password is incorrect.'
+        });
+      }
+    } else {
+      throw error;
+    }
+  });
+
+});
