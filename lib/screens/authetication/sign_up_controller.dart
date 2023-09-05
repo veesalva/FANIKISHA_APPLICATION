@@ -17,7 +17,6 @@ class SignUpController extends GetxController {
   final password = TextEditingController();
   final repeatPassword = TextEditingController();
   final phoneNumber = TextEditingController();
-  final bankAccountNumber = TextEditingController();
 
   // function to register the user this will be called from the design
   void registerUser(String email, String password) {

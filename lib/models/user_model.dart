@@ -5,7 +5,6 @@ class UserModel {
   final String fullName;
   final String email;
   final String password;
-  final String bankAccountNumber;
   final String phoneNumber;
 
   const UserModel(
@@ -13,30 +12,26 @@ class UserModel {
       required this.fullName,
       required this.email,
       required this.password,
-      required this.bankAccountNumber,
       required this.phoneNumber});
 
   // convert user model to snapshot
   toJson() {
     return {
-      "FullName": fullName,
-      "Email": email,
-      "PhoneNumber": phoneNumber,
-      "Password": password,
-      "BankAccountNumber": bankAccountNumber,
+      "fullname": fullName,
+      "email": email,
+      "phone_number": phoneNumber,
+      "password": password,
     };
   }
 
 //   convert snapshot to user model
-  factory UserModel.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> document) {
+  factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return UserModel(
         id: document.id,
         fullName: data["FullName"],
         email: data["Email"],
         password: data["Password"],
-        bankAccountNumber: data["BankAccountNumber"],
         phoneNumber: data["PhoneNumber"]);
   }
 

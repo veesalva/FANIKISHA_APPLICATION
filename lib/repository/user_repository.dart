@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fanikisha_app/models/user_model.dart';
-import 'package:fanikisha_app/screens/authetication/forget_password/otp_screen.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+
+import '../constant/Constant.dart';
 
 // this is to perform database  operations on the user
 class UserRepository extends GetxController {
@@ -10,42 +13,44 @@ class UserRepository extends GetxController {
 //   database instance
   final _db = FirebaseFirestore.instance;
 
-// create user in the database
 
-  createUser(UserModel user) async {
-    await _db.collection("users").add(user.toJson()).whenComplete(() {
-      Get.snackbar(
-        "Success",
-        "Your Account has been created",
-        snackPosition: SnackPosition.BOTTOM,
-      );
-      // redirect to otp screen
-      Get.to(OTPScreen());
-    }).catchError(
-      (error, stackTrace) {
-        Get.snackbar(
-          "Error",
-          "Something went wrong",
-          snackPosition: SnackPosition.BOTTOM,
-        );
-        print(error.toString());
+
+
+
+//   get users form mysql
+  Future<void> fetchData() async {
+    final response = await http.get(Uri.parse('http://localhost:5000/users'));
+
+    if (response.statusCode == 200) {
+      // The request was successful, and you can parse the response here.
+      print('Response data: ${response.body}');
+    } else {
+      // The request failed or the server returned an error response.
+      print('Request failed with status: ${response.statusCode}');
+    }
+  }
+
+//   create user in a database
+  Future<void> createUser(UserModel user) async {
+    final String apiUrl = 'http://'+Constant.ipAddress+":5000/users";
+
+    final Map<String, dynamic> data = user.toJson();
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: jsonEncode(data),
     );
+
+    if (response.statusCode == 201) {
+      // Successfully created the record in the database
+      print('Data posted successfully');
+    } else {
+      // Failed to create the record
+      print('Failed to post data. Status code: ${response.statusCode}');
+    }
   }
 
-//   get one user details from database
-  Future<UserModel> getUserDetails(String email) async {
-    final snapshot =
-        await _db.collection("users").where("Email", isEqualTo: email).get();
-    final userData = snapshot.docs.map((e) => UserModel.fromSnapshot(e)).single;
-    return userData;
-  }
-
-  //   get all users details from database
-  Future<List<UserModel>> getAllUsers() async {
-    final snapshot = await _db.collection("users").get();
-    final userData =
-        snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();
-    return userData;
-  }
 }
