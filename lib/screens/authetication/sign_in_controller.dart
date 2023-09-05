@@ -9,6 +9,6 @@ class SignInController extends GetxController {
   final password = TextEditingController();
 
   void signInUser(String email, String password) {
-    AutheticationRepository.instance.loginWithEmailAndPassword(email, password);
+    //AutheticationRepository.instance.loginWithEmailAndPassword(email, password);
   }
 }
