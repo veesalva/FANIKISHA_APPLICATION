@@ -17,10 +17,11 @@ class UserModel {
   // convert user model to snapshot
   toJson() {
     return {
-      "fullname": fullName,
+      "fullName": fullName,
       "email": email,
-      "phone_number": phoneNumber,
+      "phoneNumber": phoneNumber,
       "password": password,
+      "user_type":"user"
     };
   }
 

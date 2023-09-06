@@ -1,4 +1,6 @@
+import 'package:fanikisha_app/screens/authetication/AuthService.dart';
 import 'package:fanikisha_app/screens/home.dart';
+import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -55,7 +57,13 @@ class _SplashScreenState extends State<SplashScreen> {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return HomePage();
+          if(AuthService.isUserLoggenIn() == true) {
+            // User is logged in, redirect to the dashboard
+            return BottomNavigationBarWidget();
+          } else {
+            //User is not logged in, redirect to the login page
+            return HomePage();
+          };
         },
       ),
     );

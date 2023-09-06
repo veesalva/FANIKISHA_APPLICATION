@@ -52,6 +52,7 @@ class _SignUpFormState extends State<SignUp> {
         setState(() {
           _errorText = '';
         });
+        Navigator.push(context, MaterialPageRoute(builder: (context) => OTPScreen(),));
       }
       //
     }

@@ -19,10 +19,7 @@ class SignUpController extends GetxController {
   final phoneNumber = TextEditingController();
 
   // function to register the user this will be called from the design
-  void registerUser(String email, String password) {
-    AutheticationRepository.instance
-        .createUserWithEmailAndPassword(email, password);
-  }
+
 
   void phoneNumberAuthentication(String phoneNumber) {
     AutheticationRepository.instance.phoneAuthetication(phoneNumber);
@@ -35,7 +32,6 @@ class SignUpController extends GetxController {
     }) ;
     // check is registered to the database
     if (isRegistered) {
-      registerUser(user.email, user.password);
       // todo look to increase speed here
       phoneNumberAuthentication(user.phoneNumber);
       return true;
