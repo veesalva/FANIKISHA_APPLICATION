@@ -23,17 +23,17 @@ class ViewProfile extends StatelessWidget {
                   image: AssetImage("images/profile.jpg"), fit: BoxFit.cover),
             ),
           ),
-          Align(
+          const Align(
+            alignment: Alignment.center,
             child: Text("Victoria Kundi"),
-            alignment: Alignment.center,
           ),
-          Align(
+          const Align(
+            alignment: Alignment.center,
             child: Text("victoriakundi@gmail.com"),
-            alignment: Alignment.center,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Container(
-            margin: EdgeInsets.fromLTRB(10,5,10,5),
+            margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextFormField(
               decoration: const InputDecoration(
                 labelText: "Last Name",
@@ -41,9 +41,8 @@ class ViewProfile extends StatelessWidget {
               ),
             ),
           ),
-
           Container(
-            margin: EdgeInsets.fromLTRB(10,5,10,5),
+            margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextFormField(
               decoration: const InputDecoration(
                 labelText: "Email",
@@ -51,9 +50,8 @@ class ViewProfile extends StatelessWidget {
               ),
             ),
           ),
-
           Container(
-            margin: EdgeInsets.fromLTRB(10,5,10,5),
+            margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextFormField(
               decoration: const InputDecoration(
                 labelText: "Gender",
@@ -62,7 +60,7 @@ class ViewProfile extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(10,5,10,5),
+            margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextFormField(
               decoration: const InputDecoration(
                 labelText: "Phone Number",
@@ -70,9 +68,8 @@ class ViewProfile extends StatelessWidget {
               ),
             ),
           ),
-
           Container(
-            margin: EdgeInsets.fromLTRB(10,5,10,5),
+            margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextFormField(
               decoration: const InputDecoration(
                 labelText: "Birth Date",
@@ -81,12 +78,12 @@ class ViewProfile extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(30,20,30,20),
+            padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
             child: Container(
               width: 30,
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text("Update Profile"),
+                child: const Text("Update Profile"),
               ),
             ),
           )

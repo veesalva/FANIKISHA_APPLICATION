@@ -1,35 +1,41 @@
-import 'package:fanikisha_app/custom_exceptions/signup_with_email_and_password_exception.dart';
-import 'package:fanikisha_app/screens/authetication/home.dart';
-import 'package:fanikisha_app/screens/dashboard.dart';
+import 'dart:convert';
+import 'package:fanikisha_app/models/goal_model.dart';
+import 'package:fanikisha_app/screens/authetication/login.dart';
+import 'package:fanikisha_app/screens/home.dart';
+import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../constant/Constant.dart';
+import '../../../models/user_model.dart';
 
 class AutheticationRepository extends GetxController {
   static AutheticationRepository get instance => Get.find();
 
-//   variable
+
   final _auth = FirebaseAuth.instance;
   late final Rx<User?> firebaseUser;
   var verificationId = ''.obs;
-
+/*//   variable
   @override
   void onReady() {
     firebaseUser = Rx<User?>(_auth.currentUser);
     firebaseUser.bindStream(_auth.userChanges());
     // listening to user login and out
     ever(firebaseUser, _setInitialScreen);
-  }
+  }*/
 
   _setInitialScreen(User? user) {
     // perform the redirection to home or dashboard depending on the user sign in or out
     user == null
         ? Get.offAll(() => HomePage())
-        : Get.offAll(() =>  DashboardPage());
+        : Get.offAll(() => BottomNavigationBarWidget());
   }
 
 //   create user
-
-  Future<void> createUserWithEmailAndPassword(
+  /*Future<void> createUserWithEmailAndPassword(
       String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
@@ -37,7 +43,7 @@ class AutheticationRepository extends GetxController {
       // todo : look for otp before redirecting to DashBoard Page
       firebaseUser.value == null
           ? Get.offAll(() => HomePage())
-          : Get.offAll(() =>  DashboardPage());
+          : Get.offAll(() => OTPScreen());
     } on FirebaseAuthException catch (e) {
       final ex = SignupWithEmailAndPasswordFailure.code(e.code);
       print("FIREBASE AUTH EXCEPTION ${ex.message}");
@@ -47,23 +53,40 @@ class AutheticationRepository extends GetxController {
       print("EXCEPTION $ex");
       throw ex;
     }
-  }
+  }*/
 
-  Future<void> loginWithEmailAndPassword(String email, String password) async {
-    try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch (e) {
-      final ex = SignupWithEmailAndPasswordFailure.code(e.code);
-      print("FIREBASE AUTH EXCEPTION ${ex.message}");
-      throw ex;
-    } catch (_) {
-      final ex = const SignupWithEmailAndPasswordFailure();
-      print("EXCEPTION $ex");
-      throw ex;
+  // login with email and password
+  Future<bool> createUser(UserModel user) async {
+    final String apiUrl = 'http://' + Constant.ipAddress + ":5000/login";
+
+    final Map<String, dynamic> data = user.toJson();
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 201) {
+      // Successfully created the record in the database
+      print('Data posted successfully');
+      return true;
+    } else {
+      // Failed to create the record
+      print('Failed to post data. Status code: ${response.statusCode}');
+      return false;
     }
   }
 
-  Future<void> logout() async => await _auth.signOut();
+  // logout function
+  Future<void> logout() async {
+    //
+    SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+   await sharedPreferences.remove(Constant.authToken);
+   Get.to(Login());
+  }
 
 //   phone authentication
   Future<void> phoneAuthetication(String phoneNumber) async {
@@ -95,4 +118,66 @@ class AutheticationRepository extends GetxController {
     );
     return credentials.user != null ? true : false;
   }
+
+  //  login repository
+  Future<bool> loginWithEmailAndPassword(String email, String password) async {
+    final String loginApiUrl = 'http://' + Constant.ipAddress + ":5000/login";
+
+    final Map<String, dynamic> data = {"email": email, "password": password};
+
+    // send a request
+    final response = await http.post(
+      Uri.parse(loginApiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 200) {
+      // Successfully created the record in the database
+      final data = json.decode(response.body);
+      final token = data['data'];
+      print(token['id']);
+
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString(Constant.authToken,token['id'].toString());
+
+      print('Data posted successfully');
+      Get.to(BottomNavigationBarWidget());
+      return true;
+    } else {
+      // Failed to create the record
+      print('Failed to post data. Status code: ${response.statusCode}');
+      return false;
+    }
+  }
+
+
+  // saving a goal in database
+  Future<bool> saveGoal(GoalModel goal) async {
+    final String apiUrl = 'http://' + Constant.ipAddress + ":5000/goals";
+
+    final Map<String, dynamic> data = goal.toJson();
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 201) {
+      // Successfully created the record in the database
+      print('Data posted successfully');
+      return true;
+    } else {
+      // Failed to create the record
+      print('Failed to post data. Status code: ${response.statusCode}');
+      return false;
+    }
+  }
+
+
 }

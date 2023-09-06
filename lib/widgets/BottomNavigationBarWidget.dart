@@ -1,6 +1,6 @@
 import 'package:fanikisha_app/screens/GoalList.dart';
 import 'package:fanikisha_app/screens/MakeSavings.dart';
-import 'package:fanikisha_app/screens/Settings.dart';
+import 'package:fanikisha_app/screens/settings.dart';
 import 'package:fanikisha_app/screens/dashboard.dart';
 import 'package:fanikisha_app/screens/goaldetails.dart';
 import 'package:flutter/cupertino.dart';

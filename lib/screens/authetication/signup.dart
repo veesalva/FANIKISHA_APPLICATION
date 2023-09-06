@@ -18,13 +18,15 @@ class _SignUpFormState extends State<SignUp> {
   // controller from the SignUpController
   final controller = Get.put(SignUpController());
 
-
   // field for toogle password
   bool _obscureTextPassword = true;
 
   bool _obscureTextRepeatPassword = true;
 
-  void _submitForm() {
+  // error text for to see if user already exist
+  String _errorText = '';
+
+  Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       // Perform signup logic here
       //   // SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
@@ -35,11 +37,24 @@ class _SignUpFormState extends State<SignUp> {
           fullName: controller.fullName.text.trim(),
           email: controller.email.text.trim(),
           password: controller.password.text.trim(),
-          bankAccountNumber: controller.bankAccountNumber.text.trim(),
           phoneNumber: controller.phoneNumber.text.trim());
-         // create the user in the database
-         SignUpController.instance.createUser(user);
-    //
+      // create the user in the database
+      bool userNotExist=true;
+    await SignUpController.instance.createUser(user).then((value) => {
+      userNotExist=value
+    });
+
+      if (!userNotExist) {
+        setState(() {
+          _errorText = "User already exists in database";
+        });
+      } else {
+        setState(() {
+          _errorText = '';
+        });
+        Navigator.push(context, MaterialPageRoute(builder: (context) => OTPScreen(),));
+      }
+      //
     }
   }
 
@@ -55,7 +70,7 @@ class _SignUpFormState extends State<SignUp> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28.0),
             ),
             Text(
-              "level up your saving habit",
+              "Level up your saving habit",
               style: TextStyle(color: Colors.black),
             ),
           ],
@@ -69,16 +84,29 @@ class _SignUpFormState extends State<SignUp> {
             children: [
               Text(
                 "Let's get you started".toUpperCase(),
-                style: const TextStyle(color: Colors.black54),
+                style: const TextStyle(
+                    color: Colors.black54, fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 16.0),
               const Text(
                 "Create an Account",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
-              const SizedBox(height: 16.0),
+              const SizedBox(height: 10.0),
+              Text(
+                _errorText,
+                style: const TextStyle(
+                    color: Colors.red,fontSize:20),
+              ),
+              SizedBox(height: 10,),
               TextFormField(
                 controller: controller.fullName,
+                validator: (value) {
+                  if (value!.trim().isEmpty) {
+                    return 'Please enter a fullname.';
+                  }
+                  return null;
+                },
                 decoration: const InputDecoration(
                   labelText: 'Full Name',
                   border: OutlineInputBorder(),
@@ -88,6 +116,12 @@ class _SignUpFormState extends State<SignUp> {
               TextFormField(
                 controller: controller.email,
                 keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value!.isEmpty || !value.contains('@')) {
+                    return 'Please enter a valid email address.';
+                  }
+                  return null;
+                },
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
@@ -97,6 +131,13 @@ class _SignUpFormState extends State<SignUp> {
               TextFormField(
                 controller: controller.phoneNumber,
                 keyboardType: TextInputType.phone,
+                // todo check for phone number format
+                validator: (value) {
+                  if (value!.trim().isEmpty) {
+                    return 'Please enter phone number';
+                  }
+                  return null;
+                },
                 decoration: const InputDecoration(
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
@@ -106,6 +147,12 @@ class _SignUpFormState extends State<SignUp> {
               //   password text field
               TextFormField(
                 controller: controller.password,
+                validator: (value) {
+                  if (value!.trim().isEmpty || value.trim().length < 7) {
+                    return 'Password must be at least 7 characters long.';
+                  }
+                  return null;
+                },
                 decoration: InputDecoration(
                   labelText: 'Password',
                   border: const OutlineInputBorder(),
@@ -141,20 +188,11 @@ class _SignUpFormState extends State<SignUp> {
                       onPressed: () {
                         setState(() {
                           _obscureTextRepeatPassword =
-                          !_obscureTextRepeatPassword;
+                              !_obscureTextRepeatPassword;
                         });
                       },
                     )),
                 obscureText: _obscureTextRepeatPassword,
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: controller.bankAccountNumber,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Bank Account Number',
-                  border: OutlineInputBorder(),
-                ),
               ),
               const SizedBox(height: 32.0),
               const Row(
@@ -169,13 +207,13 @@ class _SignUpFormState extends State<SignUp> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.0, 8.0, 0, 0),
                         child: Text(
-                          "By clicking on ‘sign up’, you’re agreeing to the  ",
+                          "By clicking on ‘Sign Up’, you’re agreeing to the    ",
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.0, 0, 0, 8),
                         child: Text(
-                          "Chunky app Terms of Service and Privacy Policy  ",
+                          "Fanikisha Terms of Service and Privacy Policy.  ",
                         ),
                       ),
                     ],
@@ -198,8 +236,8 @@ class _SignUpFormState extends State<SignUp> {
                 Text("OR"),
                 Expanded(
                     child: Divider(
-                      color: Colors.black,
-                    )),
+                  color: Colors.black,
+                )),
               ]),
               const SizedBox(height: 20.0),
               OutlinedButton(
@@ -207,10 +245,11 @@ class _SignUpFormState extends State<SignUp> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Icon(FontAwesomeIcons.google),
+                    FaIcon(FontAwesomeIcons.google,
+                        color: Color.fromRGBO(0x34, 0xa8, 0x53, 1.0)),
                     Text(
                       "Login with Google",
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Colors.black54),
                     ),
                   ],
                 ),
@@ -240,7 +279,7 @@ class _SignUpFormState extends State<SignUp> {
                     child: const Text(
                       'Log In',
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Colors.green,
                         decoration: TextDecoration.underline,
                         fontSize: 16,
                       ),

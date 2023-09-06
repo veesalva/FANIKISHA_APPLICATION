@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       transitionDuration: const Duration(milliseconds: 500),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

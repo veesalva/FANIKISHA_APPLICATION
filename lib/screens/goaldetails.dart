@@ -1,3 +1,4 @@
+import 'package:fanikisha_app/screens/payment_invoice.dart';
 import 'package:flutter/material.dart';
 
 class GoalDetails extends StatefulWidget {
@@ -89,10 +90,17 @@ class _GoalDetailsState extends State<GoalDetails> {
               trailing: Text("0755497834"),
             ),
           ),
-          SizedBox(
-            width: 25,
+          Container(
+            margin: EdgeInsets.all(20),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentInvoice(),
+                  ),
+                );
+              },
               child: Text("Make Payment"),
             ),
           )

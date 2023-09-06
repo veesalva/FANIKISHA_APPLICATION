@@ -1,6 +1,7 @@
 
 class Constant{
 
-  // for connecting physical device and the localhost
-  static const String ipAddress="192.168.137.1";
+  // for connecting phsical device and the localhost
+  static const String ipAddress="192.168.1.90";
+  static const String authToken="authToken";
 }
