@@ -55,4 +55,27 @@ class UserRepository extends GetxController {
     }
   }
 
+
+  // method to get logged in user details
+  Future<Map<String, dynamic>?> fetchUserData(String userId) async {
+    final url = Uri.parse('http://${Constant.ipAddress}/user/$userId'); // Api url to get user by id
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, parse the JSON data.
+        final Map<String, dynamic> data = json.decode(response.body);
+        return data;
+      } else {
+        // If the server returns an error response, throw an exception.
+        throw Exception('Failed to load user data');
+      }
+    } catch (e) {
+      // Handle network or other errors here.
+      print('Error: $e');
+      return null;
+    }
+  }
+
 }

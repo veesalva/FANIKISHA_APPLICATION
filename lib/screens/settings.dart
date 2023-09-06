@@ -1,21 +1,23 @@
 import 'package:fanikisha_app/constant/Constant.dart';
+import 'package:fanikisha_app/models/user_model.dart';
 import 'package:fanikisha_app/screens/Viewprofile.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
+import 'package:fanikisha_app/screens/authetication/logged_user_data_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
-
-
 
   @override
   State<Settings> createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
-  //String id = sharedPreferences.getString(['id']);
+  UserModel? userModel;
+  final controller = Get.put(LoggedUserDataController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,12 +49,12 @@ class _SettingsState extends State<Settings> {
                         fit: BoxFit.cover)),
               ),
               title: const Text(
-                "John Doe",
+               'John Doe' ,
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              subtitle:  const Text(
-               "kaDSLJ",
+              subtitle: const Text(
+                "kaDSLJ",
                 style: TextStyle(color: Colors.white),
               ),
               tileColor: Colors.green,
@@ -100,20 +102,27 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(
                   height: 10,
                 ),
-                 const ListTile(
-                  leading: CircleAvatar(
+                 ListTile(
+                  onTap: () {
+                    print("hello");
+                    controller.getUserData("1").then((value) => {
+                      print(value)
+                    }).whenComplete(() => print("hello")
+                    );
+                  },
+                  leading: const CircleAvatar(
                     radius: 25,
                     child: Icon(FontAwesomeIcons.lock),
                   ),
-                  title: Text(
+                  title: const Text(
                     "Face ID/ Touch ID",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     "Manage Your Device Security",
                     style: TextStyle(),
                   ),
-                  trailing: Icon(Icons.arrow_forward_ios),
+                  trailing: const Icon(Icons.arrow_forward_ios),
                 ),
                 const SizedBox(
                   height: 10,
@@ -273,7 +282,7 @@ class _SettingsState extends State<Settings> {
                     title: Text(
                       "Instagram",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
                   ),
@@ -288,7 +297,7 @@ class _SettingsState extends State<Settings> {
                     title: Text(
                       "Facebook",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
                   ),
@@ -303,7 +312,7 @@ class _SettingsState extends State<Settings> {
                     title: Text(
                       "Rate the App",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
                   ),
