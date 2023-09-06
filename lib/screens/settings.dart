@@ -1,3 +1,4 @@
+import 'package:fanikisha_app/constant/Constant.dart';
 import 'package:fanikisha_app/screens/Viewprofile.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:flutter/material.dart';
@@ -13,25 +14,7 @@ class Settings extends StatefulWidget {
   State<Settings> createState() => _SettingsState();
 }
 
-String? myString;
-
 class _SettingsState extends State<Settings> {
-
-  Future<void> getStringFromSharedPreferences() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    myString = sharedPreferences.getString('id');
-
-    if (myString != null) {
-      // Use the retrieved string here.
-      print('Retrieved String: $myString');
-    } else {
-      // The key doesn't exist in shared preferences.
-      print('String not found in shared preferences.');
-    }
-  }
-
-
-
   //String id = sharedPreferences.getString(['id']);
   @override
   Widget build(BuildContext context) {
@@ -68,8 +51,8 @@ class _SettingsState extends State<Settings> {
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              subtitle:  Text(
-                myString??"",
+              subtitle:  const Text(
+               "kaDSLJ",
                 style: TextStyle(color: Colors.white),
               ),
               tileColor: Colors.green,
@@ -117,7 +100,7 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(
                   height: 10,
                 ),
-                const ListTile(
+                 const ListTile(
                   leading: CircleAvatar(
                     radius: 25,
                     child: Icon(FontAwesomeIcons.lock),
