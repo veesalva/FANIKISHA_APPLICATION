@@ -153,6 +153,91 @@ class _SettingsState extends State<Settings> {
               "More",
               style: TextStyle(color: Colors.grey, fontSize: 20),
             ),
+<<<<<<< Updated upstream:lib/screens/Settings.dart
+=======
+          ),
+          // more card
+           Card(
+            margin: const EdgeInsets.all(10),
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          backgroundColor: Colors.black,
+                          title: const Text('Fanikisha App is up to date',
+                              style: TextStyle(color: Colors.white)),
+                          content: const Text(
+                            'Version: 1.34.8',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () =>{},
+                              child: const Text('Retry'),
+                            ),
+                            TextButton(
+                              onPressed: () =>{},
+                              child: const Text('Understood'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    leading: const CircleAvatar(
+                      radius: 25,
+                      child: Icon(Icons.supervised_user_circle),
+                    ),
+                    title: const Text(
+                      "Check for Updates & Version",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      child: Icon(Icons.help_outline_rounded),
+                    ),
+                    title: Text(
+                      "FAQs & Support",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      child: Icon(Icons.verified_user),
+                    ),
+                    title: Text(
+                      "Legal",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+          ),
+>>>>>>> Stashed changes:lib/screens/settings.dart
 
           ),
           const Card(

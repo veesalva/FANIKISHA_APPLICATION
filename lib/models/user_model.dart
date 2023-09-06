@@ -19,11 +19,18 @@ class UserModel {
   // convert user model to snapshot
   toJson() {
     return {
+<<<<<<< Updated upstream
       "FullName": fullName,
       "Email": email,
       "PhoneNumber": phoneNumber,
       "Password": password,
       "BankAccountNumber": bankAccountNumber,
+=======
+      "fullName": fullName,
+      "email": email,
+      "phoneNumber": phoneNumber,
+      "password": password,
+>>>>>>> Stashed changes
     };
   }
 
