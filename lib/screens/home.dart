@@ -36,24 +36,6 @@ class HomePage extends StatelessWidget {
                   const SizedBox(
                     height: 50.0,
                   ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CreateGoal(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    'Sign up',
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
                   const Text(
                     'Weka akiba kwa muda utakao.',
                     style: TextStyle(

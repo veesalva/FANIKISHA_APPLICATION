@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:fanikisha_app/models/goal_model.dart';
 import 'package:fanikisha_app/screens/authetication/login.dart';
 import 'package:fanikisha_app/screens/home.dart';
 import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
@@ -138,8 +139,10 @@ class AutheticationRepository extends GetxController {
       final data = json.decode(response.body);
       final token = data['data'];
       print(token['id']);
+
       SharedPreferences preferences = await SharedPreferences.getInstance();
       preferences.setString(Constant.authToken,token['id'].toString());
+
       print('Data posted successfully');
       Get.to(BottomNavigationBarWidget());
       return true;
@@ -149,4 +152,32 @@ class AutheticationRepository extends GetxController {
       return false;
     }
   }
+
+
+  // saving a goal in database
+  Future<bool> saveGoal(GoalModel goal) async {
+    final String apiUrl = 'http://' + Constant.ipAddress + ":5000/goals";
+
+    final Map<String, dynamic> data = goal.toJson();
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 201) {
+      // Successfully created the record in the database
+      print('Data posted successfully');
+      return true;
+    } else {
+      // Failed to create the record
+      print('Failed to post data. Status code: ${response.statusCode}');
+      return false;
+    }
+  }
+
+
 }

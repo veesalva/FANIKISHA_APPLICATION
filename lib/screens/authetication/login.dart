@@ -30,20 +30,8 @@ class _LoginState extends State<Login> {
       // check if user has succesfully logged in
       bool isCredentials = true;
       // todo cannot get value from this async  signInUser
-      await controller.signInUser(
-          controller.email.text.trim(), controller.password.text.trim());
-
-    bool isAuthenticated=SignInController.instance.isUserAuthenticated();
-    print(isAuthenticated);
-    if(!isAuthenticated){
-      setState(() {
-        _errorText='Incorrect email or password';
-      });
-    }else{
-      setState(() {
-        _errorText='';
-      });
-    }
+      await controller
+          .signInUser(controller.email.text.trim(), controller.password.text.trim());
     }
   }
 

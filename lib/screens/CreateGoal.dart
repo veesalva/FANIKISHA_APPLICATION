@@ -1,7 +1,7 @@
-import 'package:date_field/date_field.dart';
-import 'package:fanikisha_app/screens/saving_plan_options.dart';
+import 'package:fanikisha_app/models/goal_model.dart';
+import 'package:fanikisha_app/screens/authetication/create_goal_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 enum GoalPriorityEnum { High, Medium, Low }
 
@@ -14,12 +14,28 @@ class CreateGoal extends StatefulWidget {
 
 class _CreateGoalState extends State<CreateGoal> {
   GoalPriorityEnum? _goalPriorityEnum;
-  final TextEditingController _startdate = TextEditingController();
-  final TextEditingController _enddate = TextEditingController();
+  DateTime? selectedEndDate;
+  DateTime? selectedStartDate;
+  final controller = Get.put(CreateGoalController());
 
   // field for selected dates from an to
   DateTime fromSelectedDate = DateTime.now();
   DateTime toSelectedDate = DateTime.now();
+
+  void _saveGoal(BuildContext context) async {
+    controller.goalPriority.text = _goalPriorityEnum.toString().split('.')[1];
+    final goal = GoalModel(
+        userId: "1",
+        goalType: "food",
+        goalAmount: controller.amount.text.trim(),
+        paymentNumber: "09748127981",
+        goalPriority: controller.goalPriority.text.trim(),
+        startDate: controller.startDate.text.trim(),
+        endDate: controller.endDate.text.trim(),
+        goalName: controller.goalName.text.trim());
+
+    await controller.createGoal(goal);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +78,7 @@ class _CreateGoalState extends State<CreateGoal> {
                 child: Column(
               children: [
                 TextFormField(
+                  controller: controller.goalName,
                   decoration: const InputDecoration(
                     labelText: "Goal Name",
                     border: OutlineInputBorder(),
@@ -80,6 +97,7 @@ class _CreateGoalState extends State<CreateGoal> {
                   height: 15,
                 ),
                 TextFormField(
+                  controller: controller.amount,
                   decoration: const InputDecoration(
                     labelText: "Amount",
                     border: OutlineInputBorder(),
@@ -208,7 +226,7 @@ class _CreateGoalState extends State<CreateGoal> {
                   width: 120,
                   height: 40,
                   child: TextFormField(
-                      controller: _startdate,
+                      controller: controller.startDate,
                       decoration: const InputDecoration(
                         labelText: "Start Date",
                         border: OutlineInputBorder(
@@ -217,17 +235,19 @@ class _CreateGoalState extends State<CreateGoal> {
                       ),
                       keyboardType: TextInputType.datetime,
                       onTap: () async {
-                        DateTime? pickeddate = await showDatePicker(
+                        DateTime? pickedDate = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2100),
                         );
-                        setState(() {
-                          _startdate.text =
-                              DateFormat('dd-MM-yyyy').format(pickeddate!);
-                        });
-                      }),
+                        if (pickedDate != null) {
+                          setState(() {
+                            selectedStartDate = pickedDate;
+                            controller.startDate.text = "${pickedDate.toLocal()}".split(' ')[0]; // Format the date as needed
+                          });
+                        }
+                      },),
                 ),
               ),
               const SizedBox(width: 100),
@@ -237,27 +257,30 @@ class _CreateGoalState extends State<CreateGoal> {
                   width: 120,
                   height: 40,
                   child: TextFormField(
-                      controller: _enddate,
-                      decoration: const InputDecoration(
-                        labelText: "End Date",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
+                    controller: controller.endDate,
+                    decoration: const InputDecoration(
+                      labelText: "End Date",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                       ),
-                      keyboardType: TextInputType.datetime,
-                      onTap: () async {
-                        DateTime? pickeddate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100),
-                        );
+                    ),
+                    keyboardType: TextInputType.datetime,
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                      );
+
+                      if (pickedDate != null) {
                         setState(() {
-                          _enddate.text =
-                              DateFormat('dd-MM-yyyy').format(pickeddate!);
-                          if(_enddate.text != _startdate.text );
+                          selectedEndDate = pickedDate;
+                          controller.endDate.text = "${pickedDate.toLocal()}".split(' ')[0]; // Format the date as needed
                         });
-                      }),
+                      }
+                    },
+                  ),
                 ),
               ),
             ],
@@ -272,11 +295,7 @@ class _CreateGoalState extends State<CreateGoal> {
               height: 40,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SavingPlanOptions(),
-                      ));
+                  _saveGoal(context);
                 },
                 child: const Text("ADD GOAL"),
               ),

@@ -128,3 +128,36 @@ app.post('/login', (req, res) => {
   });
 
 });
+
+
+//post api to register users in the database
+app.post('/goals', (req, res) => {
+  const goal = req.body;
+  // insert a goal in a database
+
+
+//           todo change
+db.query('SELECT * FROM goals WHERE goal_name = ?', [goal.goal_name], (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      res.status(500).json({ error: 'Failed to fetch user' });
+      return;
+    }
+
+     if (result.length > 0) {
+          return res.status(400).json({ message: 'goal already exists',exists:true });
+        }else{
+          // Insert the user into the database
+           db.query('INSERT INTO goals SET ?', goal, (err, result) => {
+                       if (err) {
+                         console.error('Error inserting a goal:', err);
+                         res.status(500).json({ error: 'Failed to save goal' });
+                         return;
+                       }
+
+                       console.log('goal inserted successfully');
+                       res.status(201).json({ message: 'goal saved successfully', userId: result.insertId });
+                     });
+        }
+  });
+});
