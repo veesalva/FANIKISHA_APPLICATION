@@ -31,7 +31,7 @@ class UserRepository extends GetxController {
   }
 
 //   create user in a database
-  Future<void> createUser(UserModel user) async {
+  Future<bool> createUser(UserModel user) async {
     final String apiUrl = 'http://'+Constant.ipAddress+":5000/users";
 
     final Map<String, dynamic> data = user.toJson();
@@ -47,9 +47,11 @@ class UserRepository extends GetxController {
     if (response.statusCode == 201) {
       // Successfully created the record in the database
       print('Data posted successfully');
+      return true;
     } else {
       // Failed to create the record
       print('Failed to post data. Status code: ${response.statusCode}');
+      return false;
     }
   }
 

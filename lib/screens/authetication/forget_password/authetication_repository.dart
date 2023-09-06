@@ -36,7 +36,6 @@ class AutheticationRepository extends GetxController {
   }
 
 //   create user
-
   Future<void> createUserWithEmailAndPassword(
       String email, String password) async {
     try {
@@ -57,8 +56,8 @@ class AutheticationRepository extends GetxController {
     }
   }
   // login with email and password
-  Future<void> createUser(UserModel user) async {
-    final String apiUrl = 'http://'+Constant.ipAddress+":5000/users";
+  Future<bool> createUser(UserModel user) async {
+    final String apiUrl ='http://'+Constant.ipAddress+":5000/login";
 
     final Map<String, dynamic> data = user.toJson();
 
@@ -73,13 +72,15 @@ class AutheticationRepository extends GetxController {
     if (response.statusCode == 201) {
       // Successfully created the record in the database
       print('Data posted successfully');
+      return true;
     } else {
       // Failed to create the record
       print('Failed to post data. Status code: ${response.statusCode}');
+      return false;
     }
   }
 
-  // logout page
+  // logout function
   Future<void> logout() async => await _auth.signOut();
 //   phone authentication
   Future<void> phoneAuthetication(String phoneNumber) async {
@@ -110,5 +111,30 @@ class AutheticationRepository extends GetxController {
           verificationId: this.verificationId.value, smsCode: otp),
     );
     return credentials.user != null ? true : false;
+  }
+  //  login repository
+  Future<bool> loginWithEmailAndPassword(String email, String password) async{
+  final String loginApiUrl = 'http://'+Constant.ipAddress+":5000/login";
+
+  final Map<String, dynamic> data = {"email":email,"password":password};
+
+  // send a request
+  final response = await http.post(
+    Uri.parse(loginApiUrl),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode(data),
+  );
+
+  if (response.statusCode == 200) {
+    // Successfully created the record in the database
+    print('Data posted successfully');
+    return true;
+  } else {
+    // Failed to create the record
+    print('Failed to post data. Status code: ${response.statusCode}');
+    return false;
+  }
   }
 }

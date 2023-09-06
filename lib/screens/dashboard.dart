@@ -29,7 +29,7 @@ class DashboardPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          BankCard(cardHolder: "John Doe"),
+          BankCard(cardHolder: "**** ****",bankAccountNumber: "***** ***** ***** ****",isAccountAdded: false),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

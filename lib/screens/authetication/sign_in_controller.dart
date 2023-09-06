@@ -8,7 +8,13 @@ class SignInController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
 
-  void signInUser(String email, String password) {
-    // AutheticationRepository.instance.loginWithEmailAndPassword(email, password);
+  Future<bool> signInUser(String email, String password) async {
+    bool isAutheticated=false;
+    await AutheticationRepository.instance
+        .loginWithEmailAndPassword(email, password)
+        .then((value) =>{
+          print(value)
+    });
+    return isAutheticated;
   }
 }

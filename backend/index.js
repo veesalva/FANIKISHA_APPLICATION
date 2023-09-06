@@ -75,26 +75,40 @@ app.get('/user/:id', function (req,res){
 
 //post api to register users in the database
 app.post('/users', (req, res) => {
-  const user = req.body; // Assuming the request body contains user data
-
-  // Insert the user into the database
-  db.query('INSERT INTO users SET ?', user, (err, result) => {
+  const user = req.body;
+  // Check if the user exists in a database
+ db.query('SELECT * FROM users WHERE email = ?', [user.email], (err, result) => {
     if (err) {
-      console.error('Error inserting user:', err);
-      res.status(500).json({ error: 'Failed to save user' });
+      console.error('Database error:', err);
+      res.status(500).json({ error: 'Failed to fetch user' });
       return;
     }
 
-    console.log('User inserted successfully');
-    res.status(201).json({ message: 'User saved successfully', userId: result.insertId });
+     if (result.length > 0) {
+          return res.status(400).json({ message: 'User already exists',exists:true });
+        }else{
+          // Insert the user into the database
+          db.query('INSERT INTO users SET ?', user, (err, result) => {
+            if (err) {
+              console.error('Error inserting user:', err);
+              res.status(500).json({ error: 'Failed to save user' });
+              return;
+            }
+
+            console.log('User inserted successfully');
+            res.status(201).json({ message: 'User saved successfully', userId: result.insertId });
+          });
+        }
   });
+
+
 });
 
 //api to login user
 app.post('/login', (req, res) => {
   const user = req.body; // Assuming the request body contains user data
   // get the user from the database
-  db.query('SELECT * FROM users WHERE email=? AND password=?', [email, password], function (error, results, fields) {
+  db.query('SELECT * FROM users WHERE email=? AND password=?', [user.email, user.password], function (error, results, fields) {
     if (!error) {
       if (results.length > 0) {
         return res.send({

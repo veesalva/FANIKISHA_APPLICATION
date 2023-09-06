@@ -179,6 +179,7 @@ class _SettingsState extends State<Settings> {
               ],
             ),
           ),
+
           Container(
             margin: const EdgeInsets.all(20),
             child: const Text(
@@ -186,6 +187,7 @@ class _SettingsState extends State<Settings> {
               style: TextStyle(color: Colors.grey, fontSize: 20),
             ),
           ),
+          // more card
           const Card(
             margin: EdgeInsets.all(10),
             elevation: 5,
@@ -199,7 +201,7 @@ class _SettingsState extends State<Settings> {
                       child: Icon(Icons.supervised_user_circle),
                     ),
                     title: Text(
-                      "About Us",
+                      "Check for Updates & Version",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -214,7 +216,7 @@ class _SettingsState extends State<Settings> {
                       child: Icon(Icons.help_outline_rounded),
                     ),
                     title: Text(
-                      "Help & Support",
+                      "FAQs & Support",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -229,9 +231,74 @@ class _SettingsState extends State<Settings> {
                       child: Icon(Icons.verified_user),
                     ),
                     title: Text(
-                      "Terms & Conditions",
+                      "Legal",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: const Text(
+              "Stay in Touch",
+              style: TextStyle(color: Colors.grey, fontSize: 20),
+            ),
+          ),
+          // stay in touch card
+          const Card(
+            margin: EdgeInsets.all(10),
+            elevation: 5,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      child: Icon(Icons.supervised_user_circle),
+                    ),
+                    title: Text(
+                      "Instagram",
+                      style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      child: Icon(Icons.help_outline_rounded),
+                    ),
+                    title: Text(
+                      "Facebook",
+                      style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      child: Icon(Icons.verified_user),
+                    ),
+                    title: Text(
+                      "Rate the App",
+                      style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     trailing: Icon(Icons.arrow_forward_ios),
                   ),

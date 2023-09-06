@@ -14,6 +14,7 @@ class _LoginState extends State<Login> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final controller = Get.put(SignInController());
   bool _rememberMe = false;
+  String _errorText = '';
 
   @override
   void dispose() {
@@ -22,12 +23,17 @@ class _LoginState extends State<Login> {
 
   bool _obscureText = true;
 
-  void _submitForm() {
+  Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
       // Perform signup logic here
       print("hello sigin");
-      controller.signInUser(
-          controller.email.text.trim(), controller.password.text.trim());
+      // check if user has succesfully logged in
+      bool isCredentials = true;
+      // todo cannot get value from this async  signInUser
+      await controller
+          .signInUser(
+              controller.email.text.trim(), controller.password.text.trim())
+          .then((value) => {print(value)});
     }
   }
 
@@ -44,6 +50,10 @@ class _LoginState extends State<Login> {
               "Welcome Back".toUpperCase(),
               style: const TextStyle(fontSize: 25.0),
             ),
+            Text(
+              _errorText,
+              style: const TextStyle(fontSize: 25.0, color: Colors.red),
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -51,7 +61,14 @@ class _LoginState extends State<Login> {
               key: _formKey,
               child: Column(
                 children: [
-                  TextField(
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.trim().isEmpty ||
+                          !value.trim().contains('@')) {
+                        return 'Please enter a valid email address.';
+                      }
+                      return null;
+                    },
                     controller: controller.email,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.person_outline_outlined),
@@ -60,13 +77,19 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   const SizedBox(height: 28.0),
-                  TextField(
+                  TextFormField(
                     controller: controller.password,
+                    validator: (value) {
+                      if (value!.trim().isEmpty || value.trim().length < 6) {
+                        return 'Password must be at least 6 characters long.';
+                      }
+                      return null;
+                    },
                     obscureText: _obscureText,
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.fingerprint_outlined),
+                      prefixIcon: const Icon(Icons.fingerprint_outlined),
                       labelText: 'Password',
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _obscureText
@@ -116,8 +139,8 @@ class _LoginState extends State<Login> {
                         if (_formKey.currentState!.validate()) {
                           // Perform signup logic here
                           print("hello sigin");
-                          controller.signInUser(
-                              controller.email.text.trim(), controller.password.text.trim());
+                          controller.signInUser(controller.email.text.trim(),
+                              controller.password.text.trim());
                         }
                       },
                       child: const Text('Login'),
