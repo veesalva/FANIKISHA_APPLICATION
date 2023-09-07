@@ -1,7 +1,6 @@
 import 'package:fanikisha_app/screens/authetication/change_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'authetication/logged_user_data_controller.dart';
 
 class ViewProfile extends StatefulWidget {

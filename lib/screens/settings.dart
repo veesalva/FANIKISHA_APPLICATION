@@ -4,6 +4,7 @@ import 'package:fanikisha_app/screens/Viewprofile.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:fanikisha_app/screens/authetication/logged_user_data_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
