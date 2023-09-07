@@ -1,6 +1,6 @@
-import 'package:fanikisha_app/screens/CreateGoal.dart';
 import 'package:fanikisha_app/screens/authetication/login.dart';
 import 'package:fanikisha_app/screens/authetication/signup.dart';
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.green,
+        backgroundColor: AppColors.accentColor,
         body: SingleChildScrollView(
           child: Stack(
             children: [

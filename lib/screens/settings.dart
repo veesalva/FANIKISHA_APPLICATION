@@ -1,6 +1,7 @@
 import 'package:fanikisha_app/screens/Viewprofile.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Settings extends StatefulWidget {

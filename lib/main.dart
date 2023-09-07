@@ -1,3 +1,4 @@
+import 'package:fanikisha_app/colors/colors.dart';
 import 'package:fanikisha_app/firebase_options.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:fanikisha_app/screens/splash_screen.dart'; // Import the splash_screen.dart file
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Colors.green,
+          primary: AppColors.accentColor,
           secondary: Colors.blue,
         ),
       ),

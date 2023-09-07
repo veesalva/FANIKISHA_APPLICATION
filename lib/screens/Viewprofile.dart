@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 
 class ViewProfile extends StatelessWidget {
   const ViewProfile({super.key});
