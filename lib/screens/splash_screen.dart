@@ -1,3 +1,4 @@
+import 'package:fanikisha_app/screens/authetication/new_home.dart';
 import 'package:fanikisha_app/screens/home.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,6 @@
 import 'package:fanikisha_app/screens/CreateGoal.dart';
 import 'package:fanikisha_app/screens/authetication/login.dart';
+import 'package:fanikisha_app/screens/authetication/new_home.dart';
 import 'package:fanikisha_app/screens/authetication/signup.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
               // Content
               Column(
                 children: [
-                  const SizedBox(height: 80), // Adjust as needed
+                  const SizedBox(height: 60), // Adjust as needed
                   Center(
                     child: Image.asset(
                       'images/logo.png',
@@ -24,11 +25,10 @@ class HomePage extends StatelessWidget {
                       height: 150,
                     ),
                   ),
-                  const SizedBox(height: 0),
                   const Text(
                     'Level Up your Saving habit ',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -36,24 +36,6 @@ class HomePage extends StatelessWidget {
                   const SizedBox(
                     height: 50.0,
                   ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CreateGoal(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    'Sign up',
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
                   const Text(
                     'Weka akiba kwa muda utakao.',
                     style: TextStyle(
@@ -77,7 +59,7 @@ class HomePage extends StatelessWidget {
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: 35,
+                bottom: 15,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -116,7 +98,7 @@ class HomePage extends StatelessWidget {
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: 5,
+                bottom: -10,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -132,7 +114,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SignUp(),
+                            builder: (context) => HomePageNew(),
                           ),
                         );
                       },
