@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 
 // todo:perform validation  on the field inputs
 class SignUp extends StatefulWidget {
+  const SignUp({super.key});
+
   @override
   _SignUpFormState createState() => _SignUpFormState();
 }
