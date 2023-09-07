@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:fanikisha_app/custom_exceptions/signup_with_email_and_password_exception.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/otp_screen.dart';
 import 'package:fanikisha_app/screens/dashboard.dart';
-import 'package:fanikisha_app/screens/home.dart';
+import 'package:fanikisha_app/screens/new_home.dart';
 import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -31,7 +31,7 @@ class AutheticationRepository extends GetxController {
   _setInitialScreen(User? user) {
     // perform the redirection to home or dashboard depending on the user sign in or out
     user == null
-        ? Get.offAll(() => HomePage())
+        ? Get.offAll(() => HomePageNew())
         : Get.offAll(() =>  BottomNavigationBarWidget());
   }
 
@@ -44,7 +44,7 @@ class AutheticationRepository extends GetxController {
           email: email, password: password);
       // todo : look for otp before redirecting to DashBoard Page
       firebaseUser.value == null
-          ? Get.offAll(() => HomePage())
+          ? Get.offAll(() => HomePageNew())
           : Get.offAll(() =>  OTPScreen());
     } on FirebaseAuthException catch (e) {
       final ex = SignupWithEmailAndPasswordFailure.code(e.code);

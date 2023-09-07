@@ -1,5 +1,4 @@
-import 'package:fanikisha_app/screens/authetication/new_home.dart';
-import 'package:fanikisha_app/screens/home.dart';
+import 'package:fanikisha_app/screens/new_home.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -52,11 +51,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future startTimer() async {
     await Future.delayed(const Duration(milliseconds: 5000));
+    // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) {
-          return HomePage();
+          return HomePageNew();
         },
       ),
     );
