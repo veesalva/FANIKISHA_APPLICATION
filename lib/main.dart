@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.leftToRightWithFade,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Poppins',
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: Colors.green,
           secondary: Colors.blue,
