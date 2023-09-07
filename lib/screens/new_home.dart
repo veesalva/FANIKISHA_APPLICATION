@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fanikisha_app/screens/authetication/login.dart';
+
 import 'package:fanikisha_app/screens/authetication/signup.dart';
+
+import 'package:fanikisha_app/screens/authetication/login.dart';
 class HomePageNew extends StatelessWidget {
+  const HomePageNew({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -75,7 +79,7 @@ class HomePageNew extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Login(),
+                          builder: (context) => const Login(),
                         ),
                       );
                     },
