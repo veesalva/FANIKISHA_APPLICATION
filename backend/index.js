@@ -130,11 +130,10 @@ app.post('/login', (req, res) => {
 });
 
 
-//post api to register users in the database
+//post api to register user goal in the database
 app.post('/goals', (req, res) => {
   const goal = req.body;
   // insert a goal in a database
-
 
 //           todo change
 db.query('SELECT * FROM goals WHERE goal_name = ?', [goal.goal_name], (err, result) => {
@@ -161,3 +160,38 @@ db.query('SELECT * FROM goals WHERE goal_name = ?', [goal.goal_name], (err, resu
         }
   });
 });
+
+
+// Assuming you already have the Express app and database connection code
+
+// PUT endpoint to update user data
+app.put('/user/:userId', (req, res) => {
+  const userId = req.params.userId;
+  const updatedUserData = req.body;
+
+  // Check if the user exists based on email
+  db.query('SELECT * FROM users WHERE id = ?', [userId], (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      res.status(500).json({ error: 'Failed to fetch user' });
+      return;
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update the user's data in the database
+    db.query('UPDATE users SET ? WHERE id = ?', [updatedUserData, userId], (err, result) => {
+      if (err) {
+        console.error('Error updating user:', err);
+        res.status(500).json({ error: 'Failed to update user' });
+        return;
+      }
+
+      console.log('User updated successfully');
+      res.status(200).json({ message: 'User updated successfully' });
+    });
+  });
+});
+
