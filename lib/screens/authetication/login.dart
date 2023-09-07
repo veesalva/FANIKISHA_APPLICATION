@@ -151,7 +151,7 @@ class _LoginState extends State<Login> {
                   Icon(FontAwesomeIcons.google),
                   Text(
                     "Login with Google",
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Colors.black54),
                   ),
                 ],
               ),
