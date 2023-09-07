@@ -18,6 +18,21 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   UserModel? userModel;
   final controller = Get.put(LoggedUserDataController());
+  String fullName = '';
+  String email = '';
+
+  @override
+  void initState() {
+    getUser();
+  }
+
+  Future<void> getUser() async {
+    await controller.getUserData().then((value) => {setState(() => {
+      fullName=value!['fullName'],
+      email=value!['email']
+    })});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,14 +63,14 @@ class _SettingsState extends State<Settings> {
                         image: AssetImage("images/saving.jpg"),
                         fit: BoxFit.cover)),
               ),
-              title: const Text(
-               'John Doe' ,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              title: Text(
+                fullName,
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              subtitle: const Text(
-                "kaDSLJ",
-                style: TextStyle(color: Colors.white),
+              subtitle: Text(
+                email,
+                style: const TextStyle(color: Colors.white),
               ),
               tileColor: Colors.green,
             ),
@@ -102,14 +117,8 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(
                   height: 10,
                 ),
-                 ListTile(
-                  onTap: () {
-                    print("hello");
-                    controller.getUserData("1").then((value) => {
-                      print(value)
-                    }).whenComplete(() => print("hello")
-                    );
-                  },
+                ListTile(
+                  onTap: () async {},
                   leading: const CircleAvatar(
                     radius: 25,
                     child: Icon(FontAwesomeIcons.lock),
@@ -325,7 +334,7 @@ class _SettingsState extends State<Settings> {
           ),
           const SizedBox(
             height: 20,
-          )
+          ),
         ],
       ),
     );

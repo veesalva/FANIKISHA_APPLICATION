@@ -1,12 +1,16 @@
-
+import 'package:fanikisha_app/constant/Constant.dart';
 import 'package:fanikisha_app/repository/user_repository.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoggedUserDataController extends GetxController {
   static LoggedUserDataController get instance => Get.find();
+  final controller = Get.put(UserRepository());
 
-  Future<Map<String, dynamic>?> getUserData(String userId) async {
-    final userData = await UserRepository.instance.fetchUserData(userId);
+  Future<Map<String, dynamic>?> getUserData() async {
+    SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+    String? userId=sharedPreferences.getString(Constant.authToken);
+    final userData = await controller.fetchUserData(userId!);
 
     if (userData != null && userData['error'] == false) {
       // Successfully fetched user data.
@@ -19,5 +23,4 @@ class LoggedUserDataController extends GetxController {
       return null;
     }
   }
-
 }
