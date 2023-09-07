@@ -20,11 +20,12 @@ class _SignUpFormState extends State<SignUp> {
   // controller from the SignUpController
   final controller = Get.put(SignUpController());
 
-
   // field for toogle password
   bool _obscureTextPassword = true;
 
   bool _obscureTextRepeatPassword = true;
+
+  bool _rememberMe = false;
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
@@ -38,9 +39,9 @@ class _SignUpFormState extends State<SignUp> {
           email: controller.email.text.trim(),
           password: controller.password.text.trim(),
           phoneNumber: controller.phoneNumber.text.trim());
-         // create the user in the database
-         SignUpController.instance.createUser(user);
-    //
+      // create the user in the database
+      SignUpController.instance.createUser(user);
+      //
     }
   }
 
@@ -70,7 +71,8 @@ class _SignUpFormState extends State<SignUp> {
             children: [
               Text(
                 "Let's get you started".toUpperCase(),
-                style: const TextStyle(color: Colors.black54,fontWeight: FontWeight.w900),
+                style: const TextStyle(
+                    color: Colors.black54, fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 16.0),
               const Text(
@@ -142,21 +144,24 @@ class _SignUpFormState extends State<SignUp> {
                       onPressed: () {
                         setState(() {
                           _obscureTextRepeatPassword =
-                          !_obscureTextRepeatPassword;
+                              !_obscureTextRepeatPassword;
                         });
                       },
                     )),
                 obscureText: _obscureTextRepeatPassword,
               ),
               const SizedBox(height: 32.0),
-              const Row(
+              Row(
                 children: [
-                  FaIcon(
-                    FontAwesomeIcons.checkSquare, // Use the checkbox icon
-                    size: 38.0,
-                    color: Colors.green,
+                  Checkbox(
+                    value: _rememberMe,
+                    onChanged: (value) {
+                      setState(() {
+                        _rememberMe = value!;
+                      });
+                    },
                   ),
-                  Column(
+                  const Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.0, 8.0, 0, 0),
@@ -190,8 +195,8 @@ class _SignUpFormState extends State<SignUp> {
                 Text("OR"),
                 Expanded(
                     child: Divider(
-                      color: Colors.black,
-                    )),
+                  color: Colors.black,
+                )),
               ]),
               const SizedBox(height: 20.0),
               OutlinedButton(
@@ -199,10 +204,8 @@ class _SignUpFormState extends State<SignUp> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    FaIcon(
-                      FontAwesomeIcons.google,
-                    color: Color.fromRGBO(0x34, 0xa8, 0x53, 1.0)
-                                      ),
+                    FaIcon(FontAwesomeIcons.google,
+                        color: Color.fromRGBO(0x34, 0xa8, 0x53, 1.0)),
                     Text(
                       "Login with Google",
                       style: TextStyle(color: Colors.black54),
