@@ -14,15 +14,15 @@ class ViewProfile extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          Container(
-            width: 130,
-            height: 130,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  image: AssetImage("images/profile.jpg"), fit: BoxFit.cover),
-            ),
-          ),
+      Container(
+        width: 130,
+        height: 130,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+              image: AssetImage("images/sample_profile.png"), fit: BoxFit.cover),
+        ),
+      ),
           const Align(
             alignment: Alignment.center,
             child: Text("Victoria Kundi"),

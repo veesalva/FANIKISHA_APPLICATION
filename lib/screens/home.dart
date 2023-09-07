@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                   // Other content goes here
                   Center(
                     child: Image.asset(
-                      'images/saving.jpg',
+                      'images/splash.jpg',
                       width: 400,
                       height: 400,
                     ),

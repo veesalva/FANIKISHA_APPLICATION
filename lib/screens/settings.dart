@@ -227,7 +227,7 @@ class _SettingsState extends State<Settings> {
                     title: const Text(
                       "Check for Updates & Version",
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                      TextStyle( fontWeight: FontWeight.bold, fontSize: 17),
                     ),
                     trailing: const Icon(Icons.arrow_forward_ios),
                   ),
