@@ -48,7 +48,6 @@ dependencies:
   http: ^1.1.0
   shared_preferences: ^2.2.1
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -80,11 +79,7 @@ flutter:
     - images/logo.png
     - images/profile.jpg
     - images/fanikisha.png
-    - images/sample_profile.png
-    - images/splash.jpg
-
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
@@ -96,11 +91,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+#  fonts:
+#     - family: SignikaNegative
+#       fonts:
+#         - asset: fonts/SignikaNegative-Regular.ttf
+#         - asset: fonts/SignikaNegative-Bold.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
@@ -110,8 +105,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-  fonts:
-    - family: Poppins
-      fonts:
-          - asset: fonts/Poppins-Bold.ttf
-          - asset: fonts/Poppins-SemiBold.ttf

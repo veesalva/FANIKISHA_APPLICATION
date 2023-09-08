@@ -1,9 +1,6 @@
 import 'package:fanikisha_app/repository/user_repository.dart';
-import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
-import '../../models/user_model.dart';
 
 class ChangeProfileController extends GetxController {
   // static variable instance to be used outside the class

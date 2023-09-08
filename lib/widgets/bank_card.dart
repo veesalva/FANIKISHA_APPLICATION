@@ -1,23 +1,16 @@
-import 'package:fanikisha_app/widgets/pop_up_screen.dart';
 import 'package:flutter/material.dart';
 
 class BankCard extends StatelessWidget {
-  BankCard(
-      {super.key,
-      required this.cardHolder,
-      required this.bankAccountNumber,
-      required this.isAccountAdded});
+  BankCard({super.key, required this.cardHolder});
 
   final String cardHolder;
-  final String bankAccountNumber;
-  final bool isAccountAdded;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(25),
       width: 330,
-      height: 200,
+      height: 180,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.bottomLeft,
@@ -37,79 +30,37 @@ class BankCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // show bank icon or No account word automatically
-                isAccountAdded
-                    ? const Icon(
-                        Icons.credit_card,
-                        color: Colors.white,
-                        size: 30,
-                      )
-                    : const Column(
-                        children: [
-                          Text(
-                            "NO ACCOUNT",
-                            style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            "****** ACCOUNT",
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                 Column(
-                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    TextButton(
-                      onPressed:() {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return MyFormPopup();
-                          },
-                        );
-                      },
-                      child: const CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Colors.green,
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    const Text(
-                      "add account",
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
+                Icon(
+                  Icons.credit_card,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                Icon(
+                  Icons.more_vert,
+                  color: Colors.white,
                 ),
               ],
             ),
           ),
           const Spacer(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Text(
-              bankAccountNumber,
-              style: const TextStyle(
+              '5821 **** **** **** 1234',
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
               ),
             ),
           ),
-          const Spacer(),
+          const Spacer(
+            flex: 2,
+          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
             child: Row(
@@ -137,10 +88,7 @@ class BankCard extends StatelessWidget {
                   ),
                 ]),
                 const Column(children: [
-                  Icon(
-                    Icons.toggle_on_outlined,
-                    color: Colors.white,
-                  ),
+                  Icon(Icons.toggle_on_outlined,color: Colors.white,),
                   Text(
                     " Show Card",
                     style: TextStyle(color: Colors.white, fontSize: 17),

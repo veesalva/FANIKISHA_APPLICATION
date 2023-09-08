@@ -22,14 +22,13 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.leftToRightWithFade,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Poppins',
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: AppColors.primaryColor,
           secondary: AppColors.accentColor,
         ),
       ),
       transitionDuration: const Duration(milliseconds: 500),
-      home: const SplashScreen(),
+      home: SplashScreen(),
     );
   }
 }
