@@ -1,6 +1,5 @@
 class GoalModel {
-  final String? goalId;
-  final String userId;
+  final String? id;
   final String goalName;
   final String goalType;
   final String goalAmount;
@@ -10,26 +9,26 @@ class GoalModel {
   final String endDate;
 
   GoalModel(
-      {required this.userId,
-      required this.goalType,
-      required this.goalAmount,
-      required this.paymentNumber,
-      required this.goalPriority,
-      required this.startDate,
-      required this.endDate,
-      this.goalId,
-      required this.goalName});
+      this.id,
+      this.goalName,
+      this.goalType,
+      this.goalAmount,
+      this.paymentNumber,
+      this.goalPriority,
+      this.startDate,
+      this.endDate
+      );
+
 
   toJson() {
     return {
-      "user_id": userId,
-      "goal_name": goalName,
-      "amount": goalAmount,
-      "goal_priority": goalPriority,
-      // todo change percent logic here
-      "goal_percent": '12%',
-      "start_date": startDate,
-      "end_date": endDate,
+      "GoalName": goalName,
+      "GoalAmount": goalAmount,
+      "GoalType": goalType,
+      "PaymentNumber": paymentNumber,
+      "GoalPriority": goalPriority,
+      "StartDate": startDate,
+      "EndDate": endDate,
     };
   }
 }

@@ -1,7 +1,7 @@
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 import '../widgets/bank_card.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -29,7 +29,7 @@ class DashboardPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          BankCard(cardHolder: "**** ****",bankAccountNumber: "***** ***** ***** ****",isAccountAdded: false),
+          BankCard(cardHolder: "John Doe"),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

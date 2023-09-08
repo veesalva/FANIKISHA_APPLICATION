@@ -9,7 +9,7 @@ class SignUpController extends GetxController {
   // static variable instance to be used outside the class
   static SignUpController get instance => Get.find();
 
-  final userRepository = Get.put(UserRepository());
+  final userRepository=Get.put(UserRepository());
 
   // fields to get data from user
   final fullName = TextEditingController();
@@ -19,24 +19,17 @@ class SignUpController extends GetxController {
   final phoneNumber = TextEditingController();
 
   // function to register the user this will be called from the design
-
+  void registerUser(String email, String password) {
+    //AutheticationRepository.instance.createUserWithEmailAndPassword(email, password);
+  }
 
   void phoneNumberAuthentication(String phoneNumber) {
     AutheticationRepository.instance.phoneAuthetication(phoneNumber);
   }
 
-  Future<bool> createUser(UserModel user) async {
-    bool isRegistered=false;
-    await userRepository.createUser(user).then((bool value) =>{
-      isRegistered=value
-    }) ;
-    // check is registered to the database
-    if (isRegistered) {
-      // todo look to increase speed here
-      phoneNumberAuthentication(user.phoneNumber);
-      return true;
-    }
-    print(isRegistered);
-    return false;
+  Future<void> createUser(UserModel user) async {
+   // await  userRepository.createUser(user);
+   phoneNumberAuthentication(user.phoneNumber);
+   registerUser(user.email, user.password);
   }
 }

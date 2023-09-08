@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:fanikisha_app/models/goal_model.dart';
 import 'package:fanikisha_app/screens/authetication/login.dart';
-import 'package:fanikisha_app/screens/home.dart';
+import 'package:fanikisha_app/screens/new_home.dart';
 import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -30,7 +30,7 @@ class AutheticationRepository extends GetxController {
   _setInitialScreen(User? user) {
     // perform the redirection to home or dashboard depending on the user sign in or out
     user == null
-        ? Get.offAll(() => HomePage())
+        ? Get.offAll(() => HomePageNew())
         : Get.offAll(() => BottomNavigationBarWidget());
   }
 

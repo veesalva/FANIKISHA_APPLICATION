@@ -5,9 +5,12 @@ import 'package:fanikisha_app/screens/authetication/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 
 // todo:perform validation  on the field inputs
 class SignUp extends StatefulWidget {
+  const SignUp({super.key});
+
   @override
   _SignUpFormState createState() => _SignUpFormState();
 }
@@ -23,10 +26,9 @@ class _SignUpFormState extends State<SignUp> {
 
   bool _obscureTextRepeatPassword = true;
 
-  // error text for to see if user already exist
-  String _errorText = '';
+  bool _rememberMe = false;
 
-  Future<void> _submitForm() async {
+  void _submitForm() {
     if (_formKey.currentState!.validate()) {
       // Perform signup logic here
       //   // SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
@@ -39,21 +41,7 @@ class _SignUpFormState extends State<SignUp> {
           password: controller.password.text.trim(),
           phoneNumber: controller.phoneNumber.text.trim());
       // create the user in the database
-      bool userNotExist=true;
-    await SignUpController.instance.createUser(user).then((value) => {
-      userNotExist=value
-    });
-
-      if (!userNotExist) {
-        setState(() {
-          _errorText = "User already exists in database";
-        });
-      } else {
-        setState(() {
-          _errorText = '';
-        });
-        Navigator.push(context, MaterialPageRoute(builder: (context) => OTPScreen(),));
-      }
+      SignUpController.instance.createUser(user);
       //
     }
   }
@@ -92,21 +80,9 @@ class _SignUpFormState extends State<SignUp> {
                 "Create an Account",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
               ),
-              const SizedBox(height: 10.0),
-              Text(
-                _errorText,
-                style: const TextStyle(
-                    color: Colors.red,fontSize:20),
-              ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 16.0),
               TextFormField(
                 controller: controller.fullName,
-                validator: (value) {
-                  if (value!.trim().isEmpty) {
-                    return 'Please enter a fullname.';
-                  }
-                  return null;
-                },
                 decoration: const InputDecoration(
                   labelText: 'Full Name',
                   border: OutlineInputBorder(),
@@ -116,12 +92,6 @@ class _SignUpFormState extends State<SignUp> {
               TextFormField(
                 controller: controller.email,
                 keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value!.isEmpty || !value.contains('@')) {
-                    return 'Please enter a valid email address.';
-                  }
-                  return null;
-                },
                 decoration: const InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
@@ -131,13 +101,6 @@ class _SignUpFormState extends State<SignUp> {
               TextFormField(
                 controller: controller.phoneNumber,
                 keyboardType: TextInputType.phone,
-                // todo check for phone number format
-                validator: (value) {
-                  if (value!.trim().isEmpty) {
-                    return 'Please enter phone number';
-                  }
-                  return null;
-                },
                 decoration: const InputDecoration(
                   labelText: 'Phone Number',
                   border: OutlineInputBorder(),
@@ -147,12 +110,6 @@ class _SignUpFormState extends State<SignUp> {
               //   password text field
               TextFormField(
                 controller: controller.password,
-                validator: (value) {
-                  if (value!.trim().isEmpty || value.trim().length < 7) {
-                    return 'Password must be at least 7 characters long.';
-                  }
-                  return null;
-                },
                 decoration: InputDecoration(
                   labelText: 'Password',
                   border: const OutlineInputBorder(),
@@ -195,14 +152,17 @@ class _SignUpFormState extends State<SignUp> {
                 obscureText: _obscureTextRepeatPassword,
               ),
               const SizedBox(height: 32.0),
-              const Row(
+              Row(
                 children: [
-                  FaIcon(
-                    FontAwesomeIcons.checkSquare, // Use the checkbox icon
-                    size: 38.0,
-                    color: Colors.green,
+                  Checkbox(
+                    value: _rememberMe,
+                    onChanged: (value) {
+                      setState(() {
+                        _rememberMe = value!;
+                      });
+                    },
                   ),
-                  Column(
+                  const Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.0, 8.0, 0, 0),
