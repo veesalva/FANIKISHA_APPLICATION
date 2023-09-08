@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constant/Constant.dart';
+import '../../../models/account_model.dart';
 import '../../../models/user_model.dart';
 
 class AutheticationRepository extends GetxController {
@@ -180,7 +181,29 @@ class AutheticationRepository extends GetxController {
   }
 
 
+// save Account info of a person
 
+  Future<bool> saveAccount(AccountModel accountModel) async {
+    final String apiUrl = 'http://' + Constant.ipAddress + ":5000/bank";
 
+    final Map<String, dynamic> data = accountModel.toJson();
 
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 201) {
+      // Successfully created the record in the database
+      print('Data posted successfully');
+      return true;
+    } else {
+      // Failed to create the record
+      print('Failed to post data. Status code: ${response.statusCode}');
+      return false;
+    }
+  }
 }

@@ -1,4 +1,6 @@
+import 'package:fanikisha_app/screens/authetication/account_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyFormPopup extends StatefulWidget {
   @override
@@ -6,8 +8,9 @@ class MyFormPopup extends StatefulWidget {
 }
 
 class _MyFormPopupState extends State<MyFormPopup> {
-  TextEditingController textField1Controller = TextEditingController();
-  TextEditingController textField2Controller = TextEditingController();
+
+  final controller = Get.put(AccountController());
+
   // variable to hide a password
   bool _obscureTextPassword=true;
 
@@ -18,7 +21,7 @@ class _MyFormPopupState extends State<MyFormPopup> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0), // Set the border radius here
       ),
-      title:  Center(child: Text('Add Account Info')),
+      title:  const Center(child: Text('Add Account Info')),
       content: Container(
         width: 320,
         child: Column(
@@ -26,19 +29,19 @@ class _MyFormPopupState extends State<MyFormPopup> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextFormField(
-              controller: textField1Controller,
+              controller: controller.accountNumber,
               decoration: const InputDecoration(
                   border: const OutlineInputBorder(),
                   labelText: 'Bank Account Number'),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(
+            const SizedBox(
              height: 10,
             ),
             TextFormField(
               keyboardType: TextInputType.number,
               obscureText:_obscureTextPassword,
-              controller: textField2Controller,
+              controller: controller.accountPin,
               decoration: const InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: 'SimBanking Pin',
@@ -54,15 +57,6 @@ class _MyFormPopupState extends State<MyFormPopup> {
                   ),
                 ),
                 onPressed: () {
-                  // Handle button click here.
-                  // You can access the field values using textField1Controller.text and textField2Controller.text.
-                  // You can also perform any necessary validation or processing.
-
-                  // For example, you can print the field values:
-                  print('Field 1: ${textField1Controller.text}');
-                  print('Field 2: ${textField2Controller.text}');
-
-                  // Close the popup.
                   Navigator.pop(context);
                 },
                 child:  Text('Add Account'.toUpperCase()),
