@@ -51,8 +51,8 @@ class HomePageNew extends StatelessWidget {
                 ),
                 Center(
                   child: Image.asset(
-                    'images/splash.jpg',
-                    width: 1700,
+                    'images/fanikisha.png',
+                    width: 700,
                     height: 500,
                   ),
                 ),
