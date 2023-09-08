@@ -1,9 +1,5 @@
-import 'package:fanikisha_app/screens/authetication/AuthService.dart';
-import 'package:fanikisha_app/screens/home.dart';
-import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
-import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
+import 'package:fanikisha_app/screens/new_home.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.accentColor,
+      backgroundColor: Colors.green,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -55,12 +51,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future startTimer() async {
     await Future.delayed(const Duration(milliseconds: 5000));
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    bool loggedIn = sharedPreferences.getString('authToken') != null;
-    Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) {
-        return loggedIn ? BottomNavigationBarWidget() : HomePage();
-      },
-    ));
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return HomePageNew();
+        },
+      ),
+    );
   }
 }
