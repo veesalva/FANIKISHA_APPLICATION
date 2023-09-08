@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:fanikisha_app/colors/colors.dart';
 import 'package:fanikisha_app/screens/authetication/signup.dart';
 
 import 'package:fanikisha_app/screens/authetication/login.dart';
@@ -10,7 +10,7 @@ class HomePageNew extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: AppColors.primaryColor,
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -51,9 +51,9 @@ class HomePageNew extends StatelessWidget {
                 ),
                 Center(
                   child: Image.asset(
-                    'images/saving.jpg',
-                    width: 400,
-                    height: 400,
+                    'images/splash.jpg',
+                    width: 1700,
+                    height: 500,
                   ),
                 ),
               ],
