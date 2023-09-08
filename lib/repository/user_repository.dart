@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:fanikisha_app/models/user_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constant/Constant.dart';
 
@@ -42,6 +43,12 @@ class UserRepository extends GetxController {
     if (response.statusCode == 201) {
       // Successfully created the record in the database
       print('Data posted successfully');
+      // setting the sharedPreferences when the user is logged in
+      SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+      String userId='';
+      final data = json.decode(response.body);
+      userId=data['userId'].toString();
+      sharedPreferences.setString(Constant.authToken, userId);
       return true;
     } else {
       // Failed to create the record
@@ -72,4 +79,35 @@ class UserRepository extends GetxController {
       return null;
     }
   }
+
+
+  Future<bool> updateUserData(String userId, Map<String, dynamic> updatedUserData) async {
+    final url = Uri.parse('http://${Constant.ipAddress}:5000/user/$userId'); // API URL to update user by ID
+
+    try {
+      final response = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json', // Set the content type to JSON
+        },
+        body: json.encode(updatedUserData), // Convert the updatedUserData to JSON
+      );
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, the user data was successfully updated.
+        return true;
+      } else {
+        // If the server returns an error response, throw an exception or handle the error as needed.
+        throw Exception('Failed to update user data');
+      }
+    } catch (e) {
+      // Handle network or other errors here.
+      print('Error: $e');
+      return false;
+    }
+  }
+
+
+
+
 }

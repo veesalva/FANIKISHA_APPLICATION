@@ -1,6 +1,7 @@
 import 'package:fanikisha_app/screens/authetication/change_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../models/user_model.dart';
 import 'authetication/logged_user_data_controller.dart';
 
 class ViewProfile extends StatefulWidget {
@@ -23,11 +24,21 @@ class _ViewProfileState extends State<ViewProfile> {
   // fetch data from db and set to the text fields
   Future<void> getUser() async {
     await controller.getUserData().then((value) => {
-      changeProfileController.fullName.text=value!['fullName'],
-      changeProfileController.email.text=value!['email'],
-      changeProfileController.password.text=value!['password'],
-      changeProfileController.phoneNumber.text=value!['phoneNumber'],
-    });
+          changeProfileController.id.text=value!['id'].toString(),
+          changeProfileController.fullName.text = value!['fullName'],
+          changeProfileController.email.text = value!['email'],
+          changeProfileController.password.text = value!['password'],
+          changeProfileController.phoneNumber.text = value!['phoneNumber'],
+        });
+  }
+
+  void _updateData() {
+    final user = UserModel(
+        id: changeProfileController.id.text.trim(),
+        fullName: changeProfileController.fullName.text.trim(),
+        email: changeProfileController.email.text.trim(),
+        password: changeProfileController.password.text.trim(),
+        phoneNumber: changeProfileController.phoneNumber.text.trim());
   }
 
   @override
@@ -104,7 +115,7 @@ class _ViewProfileState extends State<ViewProfile> {
             child: Container(
               width: 30,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: _updateData,
                 child: const Text("Update Profile"),
               ),
             ),
