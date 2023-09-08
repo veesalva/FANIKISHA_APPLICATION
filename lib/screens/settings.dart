@@ -1,4 +1,3 @@
-import 'package:fanikisha_app/constant/Constant.dart';
 import 'package:fanikisha_app/models/user_model.dart';
 import 'package:fanikisha_app/screens/Viewprofile.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
@@ -6,7 +5,6 @@ import 'package:fanikisha_app/screens/authetication/logged_user_data_controller.
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -23,14 +21,19 @@ class _SettingsState extends State<Settings> {
 
   @override
   void initState() {
+    super.initState();
     getUser();
   }
 
   Future<void> getUser() async {
-    await controller.getUserData().then((value) => {setState(() => {
+    await controller.getUserData().then((value) => {
+      print(value),
+      setState(() => {
       fullName=value!['fullName'],
-      email=value!['email']
-    })});
+      email=value!['email'],
+
+    })
+    });
   }
 
   @override
