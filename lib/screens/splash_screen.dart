@@ -1,5 +1,7 @@
 import 'package:fanikisha_app/screens/new_home.dart';
 import 'package:flutter/material.dart';
+import 'package:fanikisha_app/colors/colors.dart';
+
 
 import '../colors/colors.dart';
 
