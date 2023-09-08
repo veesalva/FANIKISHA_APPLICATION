@@ -1,6 +1,7 @@
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:fanikisha_app/screens/dashboard.dart';
 import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 import 'package:get/get.dart';
 
 class OTPController extends GetxController {

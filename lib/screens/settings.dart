@@ -1,7 +1,13 @@
+import 'package:fanikisha_app/constant/Constant.dart';
+import 'package:fanikisha_app/models/user_model.dart';
 import 'package:fanikisha_app/screens/Viewprofile.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
+import 'package:fanikisha_app/screens/authetication/logged_user_data_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -11,6 +17,23 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  UserModel? userModel;
+  final controller = Get.put(LoggedUserDataController());
+  String fullName = '';
+  String email = '';
+
+  @override
+  void initState() {
+    getUser();
+  }
+
+  Future<void> getUser() async {
+    await controller.getUserData().then((value) => {setState(() => {
+      fullName=value!['fullName'],
+      email=value!['email']
+    })});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,14 +64,14 @@ class _SettingsState extends State<Settings> {
                         image: AssetImage("images/saving.jpg"),
                         fit: BoxFit.cover)),
               ),
-              title: const Text(
-                "John Doe",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              title: Text(
+                fullName,
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              subtitle: const Text(
-                "@johndoe",
-                style: TextStyle(color: Colors.white),
+              subtitle: Text(
+                email,
+                style: const TextStyle(color: Colors.white),
               ),
               tileColor: Colors.green,
             ),
@@ -95,20 +118,21 @@ class _SettingsState extends State<Settings> {
                 const SizedBox(
                   height: 10,
                 ),
-                const ListTile(
-                  leading: CircleAvatar(
+                ListTile(
+                  onTap: () async {},
+                  leading: const CircleAvatar(
                     radius: 25,
                     child: Icon(FontAwesomeIcons.lock),
                   ),
-                  title: Text(
+                  title: const Text(
                     "Face ID/ Touch ID",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     "Manage Your Device Security",
                     style: TextStyle(),
                   ),
-                  trailing: Icon(Icons.arrow_forward_ios),
+                  trailing: const Icon(Icons.arrow_forward_ios),
                 ),
                 const SizedBox(
                   height: 10,
@@ -179,6 +203,7 @@ class _SettingsState extends State<Settings> {
               ],
             ),
           ),
+
           Container(
             margin: const EdgeInsets.all(20),
             child: const Text(
@@ -186,6 +211,7 @@ class _SettingsState extends State<Settings> {
               style: TextStyle(color: Colors.grey, fontSize: 20),
             ),
           ),
+          // more card
           const Card(
             margin: EdgeInsets.all(10),
             elevation: 5,
@@ -199,7 +225,7 @@ class _SettingsState extends State<Settings> {
                       child: Icon(Icons.supervised_user_circle),
                     ),
                     title: Text(
-                      "About Us",
+                      "Check for Updates & Version",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -214,7 +240,7 @@ class _SettingsState extends State<Settings> {
                       child: Icon(Icons.help_outline_rounded),
                     ),
                     title: Text(
-                      "Help & Support",
+                      "FAQs & Support",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -229,7 +255,72 @@ class _SettingsState extends State<Settings> {
                       child: Icon(Icons.verified_user),
                     ),
                     title: Text(
-                      "Terms & Conditions",
+                      "Legal",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: const Text(
+              "Stay in Touch",
+              style: TextStyle(color: Colors.grey, fontSize: 20),
+            ),
+          ),
+          // stay in touch card
+          const Card(
+            margin: EdgeInsets.all(10),
+            elevation: 5,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      child: Icon(Icons.supervised_user_circle),
+                    ),
+                    title: Text(
+                      "Instagram",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      child: Icon(Icons.help_outline_rounded),
+                    ),
+                    title: Text(
+                      "Facebook",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    ),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: CircleAvatar(
+                      radius: 25,
+                      child: Icon(Icons.verified_user),
+                    ),
+                    title: Text(
+                      "Rate the App",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -244,7 +335,7 @@ class _SettingsState extends State<Settings> {
           ),
           const SizedBox(
             height: 20,
-          )
+          ),
         ],
       ),
     );

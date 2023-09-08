@@ -1,7 +1,7 @@
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 import '../widgets/bank_card.dart';
 
 class DashboardPage extends StatelessWidget {

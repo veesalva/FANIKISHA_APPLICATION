@@ -1,7 +1,34 @@
+import 'package:fanikisha_app/screens/authetication/change_profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'authetication/logged_user_data_controller.dart';
 
-class ViewProfile extends StatelessWidget {
+class ViewProfile extends StatefulWidget {
   const ViewProfile({super.key});
+
+  @override
+  State<ViewProfile> createState() => _ViewProfileState();
+}
+
+class _ViewProfileState extends State<ViewProfile> {
+  final changeProfileController = Get.put(ChangeProfileController());
+  final controller = Get.put(LoggedUserDataController());
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
+  // fetch data from db and set to the text fields
+  Future<void> getUser() async {
+    await controller.getUserData().then((value) => {
+      changeProfileController.fullName.text=value!['fullName'],
+      changeProfileController.email.text=value!['email'],
+      changeProfileController.password.text=value!['password'],
+      changeProfileController.phoneNumber.text=value!['phoneNumber'],
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +62,9 @@ class ViewProfile extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextFormField(
+              controller: changeProfileController.fullName,
               decoration: const InputDecoration(
-                labelText: "Last Name",
+                labelText: "Full Name",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -44,6 +72,7 @@ class ViewProfile extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextFormField(
+              controller: changeProfileController.email,
               decoration: const InputDecoration(
                 labelText: "Email",
                 border: OutlineInputBorder(),
@@ -53,8 +82,9 @@ class ViewProfile extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextFormField(
+              controller: changeProfileController.password,
               decoration: const InputDecoration(
-                labelText: "Gender",
+                labelText: "Password",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -62,17 +92,9 @@ class ViewProfile extends StatelessWidget {
           Container(
             margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: TextFormField(
+              controller: changeProfileController.phoneNumber,
               decoration: const InputDecoration(
                 labelText: "Phone Number",
-                border: OutlineInputBorder(),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: "Birth Date",
                 border: OutlineInputBorder(),
               ),
             ),

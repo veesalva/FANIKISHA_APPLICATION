@@ -5,6 +5,7 @@ import 'package:fanikisha_app/screens/authetication/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 
 // todo:perform validation  on the field inputs
 class SignUp extends StatefulWidget {
