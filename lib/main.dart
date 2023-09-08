@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: AppColors.accentColor,
-          secondary: Colors.blue,
+          primary: AppColors.primaryColor,
+          secondary: AppColors.accentColor,
         ),
       ),
       transitionDuration: const Duration(milliseconds: 500),
