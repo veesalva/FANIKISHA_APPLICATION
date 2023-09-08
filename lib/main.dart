@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: AppColors.accentColor,
-          secondary: Colors.blue,
+          primary: AppColors.primaryColor,
+          secondary: AppColors.accentColor,
         ),
       ),
       transitionDuration: const Duration(milliseconds: 500),

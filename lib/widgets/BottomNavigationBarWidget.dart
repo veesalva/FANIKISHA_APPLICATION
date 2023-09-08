@@ -1,3 +1,4 @@
+import 'package:fanikisha_app/colors/colors.dart';
 import 'package:fanikisha_app/screens/GoalList.dart';
 import 'package:fanikisha_app/screens/MakeSavings.dart';
 import 'package:fanikisha_app/screens/settings.dart';
@@ -62,25 +63,25 @@ List<PersistentBottomNavBarItem> _navBarsItems() {
     PersistentBottomNavBarItem(
       icon: const Icon(CupertinoIcons.home),
       title: ("Home"),
-      activeColorPrimary: CupertinoColors.activeBlue,
+      activeColorPrimary: AppColors.primaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
       icon: const Icon(CupertinoIcons.gobackward),
       title: ("Goals"),
-      activeColorPrimary: CupertinoColors.activeBlue,
+      activeColorPrimary: AppColors.primaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
       icon: const Icon(Icons.money_outlined),
       title: ("Savings"),
-      activeColorPrimary: CupertinoColors.activeBlue,
+      activeColorPrimary: AppColors.primaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
       icon: const Icon(CupertinoIcons.settings),
       title: ("Settings"),
-      activeColorPrimary: CupertinoColors.activeBlue,
+      activeColorPrimary: AppColors.primaryColor,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
   ];
