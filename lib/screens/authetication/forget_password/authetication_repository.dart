@@ -188,14 +188,14 @@ class AutheticationRepository extends GetxController {
 
 
 //   fetch goal from the database
-  Future<List<Map<String, dynamic>>?> fetchData() async {
+  Future<Map<String, dynamic>?> fetchData() async {
     final response = await http.get(Uri.parse('http://'+Constant.ipAddress+':5000/goals'));
 
     if (response.statusCode == 200) {
       // The request was successful, and you can parse the response here.
-      print('Response data: ${response.body}');
+      // print('Response data: ${response.body}');
       final Map<String, dynamic> data = json.decode(response.body);
-      return data[data];
+      return data;
     } else {
       // The request failed or the server returned an error response.
       print('Request failed with status: ${response.statusCode}');

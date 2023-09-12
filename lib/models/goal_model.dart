@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class GoalModel {
    String? goalId;
    String? userId;
@@ -35,13 +37,13 @@ class GoalModel {
   }
 
   GoalModel.fromJson(Map<String, dynamic> json) {
-    goalId = json['goal_id'];
-    userId = json['user_id'];
+    goalId = json['goal_id'].toString();
+    userId = json['user_id'].toString();
     goalName = json['goal_name'];
     goalAmount = json['amount'];
     goalPriority = json['goal_priority'];
     goalPercent = json['goal_percent'];
-    startDate = json['start_date'];
-    endDate = json['end_date'];
+    startDate =  DateFormat('yyyy-MM-dd').format(DateTime.parse(json['start_date'])).toString();
+    endDate = DateFormat('yyyy-MM-dd').format(DateTime.parse(json['end_date'])).toString();
   }
 }
