@@ -210,3 +210,20 @@ app.post('/bank', (req, res) => {
              res.status(201).json({ message: 'account saved successfully', userId: result});
            });
 });
+
+
+//an api endpoint to get user goals
+app.get('/goals', function (req,res){
+    db.query('SELECT * FROM goals', function (error, results, fields ){
+        if (!error){
+            return res.send({
+                error: false,
+                data: results,
+                message: 'goals list.'
+            });
+        } else {
+            throw error;
+        }
+
+    });
+})

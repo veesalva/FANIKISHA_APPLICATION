@@ -216,15 +216,10 @@ class _SignUpFormState extends State<SignUp> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.0, 8.0, 0, 0),
                         child: Text(
-                          "By clicking on ‘Sign Up’, you’re agreeing to the    ",
+                          "By clicking on ‘Sign Up’, you’re agreeing \n to the Fanikisha Terms of Service\n and Privacy Policy.     ",
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(8.0, 0, 0, 8),
-                        child: Text(
-                          "Fanikisha Terms of Service and Privacy Policy.  ",
-                        ),
-                      ),
+
                     ],
                   )
                 ],

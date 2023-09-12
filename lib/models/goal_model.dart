@@ -1,34 +1,47 @@
 class GoalModel {
-  final String? id;
-  final String goalName;
-  final String goalType;
-  final String goalAmount;
-  final String paymentNumber;
-  final String goalPriority;
-  final String startDate;
-  final String endDate;
+   String? goalId;
+   String? userId;
+   String? goalName;
+   String? goalType;
+   String? goalAmount;
+   String? paymentNumber;
+   String? goalPriority;
+   String? startDate;
+   String? endDate;
+   String? goalPercent;
 
   GoalModel(
-      this.id,
-      this.goalName,
-      this.goalType,
-      this.goalAmount,
-      this.paymentNumber,
-      this.goalPriority,
-      this.startDate,
-      this.endDate
-      );
-
+      {required this.userId,
+        required this.goalType,
+        required this.goalAmount,
+        required this.paymentNumber,
+        required this.goalPriority,
+        required this.startDate,
+        required this.endDate,
+        this.goalId,
+        required this.goalName});
 
   toJson() {
     return {
-      "GoalName": goalName,
-      "GoalAmount": goalAmount,
-      "GoalType": goalType,
-      "PaymentNumber": paymentNumber,
-      "GoalPriority": goalPriority,
-      "StartDate": startDate,
-      "EndDate": endDate,
+      "user_id": userId,
+      "goal_name": goalName,
+      "amount": goalAmount,
+      "goal_priority": goalPriority,
+      // todo change percent logic here
+      "goal_percent": '12%',
+      "start_date": startDate,
+      "end_date": endDate,
     };
+  }
+
+  GoalModel.fromJson(Map<String, dynamic> json) {
+    goalId = json['goal_id'];
+    userId = json['user_id'];
+    goalName = json['goal_name'];
+    goalAmount = json['amount'];
+    goalPriority = json['goal_priority'];
+    goalPercent = json['goal_percent'];
+    startDate = json['start_date'];
+    endDate = json['end_date'];
   }
 }

@@ -35,27 +35,6 @@ class AutheticationRepository extends GetxController {
         : Get.offAll(() => BottomNavigationBarWidget());
   }
 
-//   create user
-  /*Future<void> createUserWithEmailAndPassword(
-      String email, String password) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      // todo : look for otp before redirecting to DashBoard Page
-      firebaseUser.value == null
-          ? Get.offAll(() => HomePage())
-          : Get.offAll(() => OTPScreen());
-    } on FirebaseAuthException catch (e) {
-      final ex = SignupWithEmailAndPasswordFailure.code(e.code);
-      print("FIREBASE AUTH EXCEPTION ${ex.message}");
-      throw ex;
-    } catch (_) {
-      final ex = const SignupWithEmailAndPasswordFailure();
-      print("EXCEPTION $ex");
-      throw ex;
-    }
-  }*/
-
   // login with email and password
   Future<bool> createUser(UserModel user) async {
     final String apiUrl = 'http://' + Constant.ipAddress + ":5000/login";
@@ -204,6 +183,23 @@ class AutheticationRepository extends GetxController {
       // Failed to create the record
       print('Failed to post data. Status code: ${response.statusCode}');
       return false;
+    }
+  }
+
+
+//   fetch goal from the database
+  Future<List<Map<String, dynamic>>?> fetchData() async {
+    final response = await http.get(Uri.parse('http://'+Constant.ipAddress+':5000/goals'));
+
+    if (response.statusCode == 200) {
+      // The request was successful, and you can parse the response here.
+      print('Response data: ${response.body}');
+      final Map<String, dynamic> data = json.decode(response.body);
+      return data[data];
+    } else {
+      // The request failed or the server returned an error response.
+      print('Request failed with status: ${response.statusCode}');
+      return null;
     }
   }
 }

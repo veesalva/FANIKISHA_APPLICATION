@@ -1,6 +1,10 @@
+import 'package:fanikisha_app/models/goal_model.dart';
 import 'package:fanikisha_app/screens/CreateGoal.dart';
-import 'package:fanikisha_app/screens/goaldetails.dart';
+import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../widgets/goal.dart';
 
 class GoalList extends StatefulWidget {
   const GoalList({super.key});
@@ -10,6 +14,29 @@ class GoalList extends StatefulWidget {
 }
 
 class _GoalListState extends State<GoalList> {
+  bool isLoading = true;
+  List<GoalModel> dynamicData = [];
+
+  final controller = Get.put(AutheticationRepository());
+
+  void initState() {
+    super.initState();
+    fetchData();
+    // Fetch initial data when the widget is initialized
+  }
+
+  Future<void> fetchData() async {
+    // Simulate data fetching delay for 2 seconds (Replace with your data retrieval logic)
+    await controller.fetchData().then((value) => {
+          setState(() {
+            for (int i = 0; i < value!.length; i++) {
+              dynamicData[i] = GoalModel.fromJson(value[i]);
+            }
+            isLoading = false; // Data is now loaded
+          })
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,116 +68,25 @@ class _GoalListState extends State<GoalList> {
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView(
-        children: [
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 70, 20, 10),
-            child: const Text(
-              "Goals",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+      body: isLoading
+          ? const Center(
+              // Display a loading indicator while data is being fetched
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: dynamicData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Goal(
+                    goalName: dynamicData[index].goalName,
+                    goalDuration: dynamicData[index].startDate! +
+                        "-" +
+                        dynamicData[index].endDate!,
+                    goalAmount: dynamicData[index].goalAmount,
+                    goalIcon: Icons.shopping_cart,
+                    // todo:goalValue logic here
+                    goalValue: 100);
+              },
             ),
-          ),
-          const Goal(
-              goalName: "Food Shopping",
-              goalDuration: "18/08/2023 - 18/10/2023",
-              goalAmount: "TZS 4,000",
-              goalIcon: Icons.shopping_cart,
-              goalValue: 50),
-          const Goal(
-              goalName: "Bundle Payment",
-              goalDuration: "18/08/2023 - 18/10/2023",
-              goalAmount: "TZS 4,000",
-              goalIcon: Icons.wifi,
-              goalValue: 80),
-          const Goal(
-              goalName: "Health Insurance",
-              goalDuration: "18/08/2023 - 18/10/2023",
-              goalAmount: "TZS 4,000",
-              goalIcon: Icons.health_and_safety,
-              goalValue: 30),
-          const Goal(
-              goalName: "Food Shopping",
-              goalDuration: "18/08/2023 - 18/10/2023",
-              goalAmount: "TZS 4,000",
-              goalIcon: Icons.shopping_cart,
-              goalValue: 50),
-          const Goal(
-              goalName: "Food Shopping",
-              goalDuration: "18/08/2023 - 18/10/2023",
-              goalAmount: "TZS 4,000",
-              goalIcon: Icons.shopping_cart,
-              goalValue: 100),
-          const Goal(
-              goalName: "Food Shopping",
-              goalDuration: "18/08/2023 - 18/10/2023",
-              goalAmount: "TZS 4,000",
-              goalIcon: Icons.shopping_cart,
-              goalValue: 50),
-          const Goal(
-              goalName: "Food Shopping",
-              goalDuration: "18/08/2023 - 18/10/2023",
-              goalAmount: "TZS 4,000",
-              goalIcon: Icons.shopping_cart,
-              goalValue: 100),
-        ],
-      ),
-    );
-  }
-}
-
-class Goal extends StatelessWidget {
-  const Goal(
-      {super.key,
-      required this.goalName,
-      required this.goalDuration,
-      required this.goalAmount,
-      required this.goalIcon,
-      required this.goalValue});
-
-  final String goalName;
-  final String goalDuration;
-  final String goalAmount;
-  final IconData goalIcon;
-  final int goalValue;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const GoalDetails();
-                  },
-                ),
-              );
-            },
-            leading: Container(
-              height: double.infinity,
-              child: Icon(goalIcon,
-                  color: goalValue != 100 ? Colors.red : Colors.green),
-            ),
-            title: Text(goalName),
-            subtitle: Column(
-              children: [
-                Text(goalDuration),
-              ],
-            ),
-            trailing: Text(goalAmount),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(28, 5, 10, 5),
-          child: LinearProgressIndicator(
-            value: goalValue / 100,
-          ),
-        )
-      ],
     );
   }
 }
