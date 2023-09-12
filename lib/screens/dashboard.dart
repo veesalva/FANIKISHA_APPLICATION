@@ -101,7 +101,7 @@ class DashboardPage extends StatelessWidget {
                   style: TextStyle(color: Colors.grey, fontSize: 17),
                 ),
                 Text(
-                  "50000/60000",
+                  "50000",
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -130,20 +130,18 @@ class DashboardPage extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: ListTile(
               onTap: () {},
-              tileColor: Colors.grey.shade400,
+              tileColor: AppColors.accentColor,
               leading: Container(
                 height: double.infinity,
-                child: const Icon(Icons.shopping_cart),
+                child: const Icon(Icons.shopping_cart, color: Colors.white),
               ),
               title: const LinearProgressIndicator(
                 minHeight: 8,
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 value: 70 / 100,
               ),
-              subtitle: const Text("Shopping"),
-              trailing: const Text(
-                "53%",
-                style: TextStyle(fontSize: 20),
+              subtitle: const Text("Shopping", style: TextStyle(color: Colors.white)),
+              trailing: const Text("53%", style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
           ),
@@ -151,20 +149,20 @@ class DashboardPage extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: ListTile(
               onTap: () {},
-              tileColor: Colors.grey.shade400,
+              tileColor: AppColors.accentColor,
               leading: Container(
                 height: double.infinity,
-                child: const Icon(Icons.electric_bolt_rounded),
+                child: const Icon(Icons.electric_bolt_rounded, color: Colors.white),
               ),
               title: const LinearProgressIndicator(
                 minHeight: 8,
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 value: 53 / 100,
               ),
-              subtitle: const Text("Electronics"),
+              subtitle: const Text("Electronics", style: TextStyle(color: Colors.white)),
               trailing: const Text(
                 "53%",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
 
@@ -173,20 +171,20 @@ class DashboardPage extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: ListTile(
               onTap: () {},
-              tileColor: Colors.grey.shade400,
+              tileColor: AppColors.accentColor,
               leading: Container(
                 height: double.infinity,
-                child: const Icon(Icons.shopping_cart),
+                child: const Icon(Icons.shopping_cart, color: Colors.white),
               ),
               title: const LinearProgressIndicator(
                 minHeight: 8,
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 value: 53 / 100,
               ),
-              subtitle: const Text("Shopping"),
+              subtitle: const Text("Shopping", style: TextStyle(color: Colors.white)),
               trailing: const Text(
                 "53%",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
 
