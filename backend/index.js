@@ -197,31 +197,33 @@ app.put('/user/:userId', (req, res) => {
 
 //POST endpoint to create a user bank account in a database
 app.post('/bank', (req, res) => {
-  const user = req.body;
+  const account = req.body;
   // Check if the user exists in a database
- db.query('SELECT * FROM users WHERE email = ?', [user.email], (err, result) => {
-    if (err) {
-      console.error('Database error:', err);
-      res.status(500).json({ error: 'Failed to fetch user' });
-      return;
-    }
+  db.query('INSERT INTO accounts SET ?', account, (err, result) => {
+             if (err) {
+               console.error('Error inserting account info:', err);
+               res.status(500).json({ error: 'Failed to save account info' });
+               return;
+             }
 
-     if (result.length > 0) {
-          return res.status(400).json({ message: 'User already exists',exists:true });
-        }else{
-          // Insert the user into the database
-          db.query('INSERT INTO users SET ?', user, (err, result) => {
-            if (err) {
-              console.error('Error inserting user:', err);
-              res.status(500).json({ error: 'Failed to save user' });
-              return;
-            }
-
-            console.log('User inserted successfully');
-            res.status(201).json({ message: 'User saved successfully', userId: result.insertId });
-          });
-        }
-  });
-
-
+             console.log('account inserted successfully');
+             res.status(201).json({ message: 'account saved successfully', userId: result});
+           });
 });
+
+
+//an api endpoint to get user goals
+app.get('/goals', function (req,res){
+    db.query('SELECT * FROM goals', function (error, results, fields ){
+        if (!error){
+            return res.send({
+                error: false,
+                data: results,
+                message: 'goals list.'
+            });
+        } else {
+            throw error;
+        }
+
+    });
+})

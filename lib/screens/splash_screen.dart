@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fanikisha_app/colors/colors.dart';
 
 
+import '../colors/colors.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 

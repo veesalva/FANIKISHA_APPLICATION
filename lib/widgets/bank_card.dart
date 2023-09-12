@@ -1,16 +1,22 @@
+import 'package:fanikisha_app/widgets/pop_up_screen.dart';
 import 'package:flutter/material.dart';
 
 class BankCard extends StatelessWidget {
-  BankCard({super.key, required this.cardHolder});
+  BankCard(
+      {super.key,
+        required this.cardHolder,
+        required this.bankAccountNumber,
+        required this.isAccountAdded});
 
   final String cardHolder;
-
+  final String bankAccountNumber;
+  final bool isAccountAdded;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(25),
       width: 330,
-      height: 180,
+      height: 200,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.bottomLeft,
@@ -30,28 +36,72 @@ class BankCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
+                // show bank icon or No account word automatically
+                isAccountAdded
+                    ? const Icon(
                   Icons.credit_card,
                   color: Colors.white,
                   size: 30,
+                )
+                    : const Column(
+                  children: [
+                    Text(
+                      "NO ACCOUNT",
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "****** ACCOUNT",
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-                Icon(
-                  Icons.more_vert,
-                  color: Colors.white,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TextButton(
+                      onPressed:() {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return MyFormPopup();
+                          },
+                        );
+                      },
+                      child: const CircleAvatar(
+                        radius: 15,
+                        backgroundColor: Colors.green,
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const Text(
+                      "add account",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
                 ),
               ],
             ),
           ),
           const Spacer(),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+           Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Text(
-              '5821 **** **** **** 1234',
+              bankAccountNumber,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -59,7 +109,6 @@ class BankCard extends StatelessWidget {
             ),
           ),
           const Spacer(
-            flex: 2,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),

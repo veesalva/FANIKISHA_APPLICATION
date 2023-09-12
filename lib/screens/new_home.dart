@@ -63,7 +63,7 @@ class HomePageNew extends StatelessWidget {
             Positioned(
               left: 0,
               right: 0,
-              bottom: 15,
+              bottom: 40,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -96,13 +96,13 @@ class HomePageNew extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 20.0,
+              height: 10.0,
             ),
             // Sign up button
             Positioned(
               left: 0,
               right: 0,
-              bottom: -10,
+              bottom: 10,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

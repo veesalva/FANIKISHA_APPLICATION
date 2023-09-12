@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constant/Constant.dart';
+import '../../../models/account_model.dart';
 import '../../../models/user_model.dart';
 
 class AutheticationRepository extends GetxController {
@@ -33,27 +34,6 @@ class AutheticationRepository extends GetxController {
         ? Get.offAll(() => HomePageNew())
         : Get.offAll(() => BottomNavigationBarWidget());
   }
-
-//   create user
-  /*Future<void> createUserWithEmailAndPassword(
-      String email, String password) async {
-    try {
-      await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      // todo : look for otp before redirecting to DashBoard Page
-      firebaseUser.value == null
-          ? Get.offAll(() => HomePage())
-          : Get.offAll(() => OTPScreen());
-    } on FirebaseAuthException catch (e) {
-      final ex = SignupWithEmailAndPasswordFailure.code(e.code);
-      print("FIREBASE AUTH EXCEPTION ${ex.message}");
-      throw ex;
-    } catch (_) {
-      final ex = const SignupWithEmailAndPasswordFailure();
-      print("EXCEPTION $ex");
-      throw ex;
-    }
-  }*/
 
   // login with email and password
   Future<bool> createUser(UserModel user) async {
@@ -180,7 +160,46 @@ class AutheticationRepository extends GetxController {
   }
 
 
+// save Account info of a person
+
+  Future<bool> saveAccount(AccountModel accountModel) async {
+    final String apiUrl = 'http://' + Constant.ipAddress + ":5000/bank";
+
+    final Map<String, dynamic> data = accountModel.toJson();
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 201) {
+      // Successfully created the record in the database
+      print('Data posted successfully');
+      return true;
+    } else {
+      // Failed to create the record
+      print('Failed to post data. Status code: ${response.statusCode}');
+      return false;
+    }
+  }
 
 
+//   fetch goal from the database
+  Future<List<Map<String, dynamic>>?> fetchData() async {
+    final response = await http.get(Uri.parse('http://'+Constant.ipAddress+':5000/goals'));
 
+    if (response.statusCode == 200) {
+      // The request was successful, and you can parse the response here.
+      print('Response data: ${response.body}');
+      final Map<String, dynamic> data = json.decode(response.body);
+      return data[data];
+    } else {
+      // The request failed or the server returned an error response.
+      print('Request failed with status: ${response.statusCode}');
+      return null;
+    }
+  }
 }
