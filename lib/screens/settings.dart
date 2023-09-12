@@ -17,6 +17,7 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   UserModel? userModel;
   final controller = Get.put(LoggedUserDataController());
+  final controller2 = Get.put(AutheticationRepository());
   String fullName = '';
   String email = '';
 
@@ -122,7 +123,9 @@ class _SettingsState extends State<Settings> {
                   height: 10,
                 ),
                 ListTile(
-                  onTap: () async {},
+                  onTap: () async {
+                    controller2.fetchData().then((value) => {print(value!['data'])});
+                  },
                   leading: const CircleAvatar(
                     radius: 25,
                     child: Icon(FontAwesomeIcons.lock),

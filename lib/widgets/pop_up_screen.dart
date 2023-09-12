@@ -31,10 +31,11 @@ class _MyFormPopupState extends State<MyFormPopup> {
           children: [
             TextFormField(
               controller: controller.accountNumber,
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Bank Account Number'),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.black),
             ),
             const SizedBox(
               height: 10,

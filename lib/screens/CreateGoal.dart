@@ -3,6 +3,8 @@ import 'package:fanikisha_app/screens/authetication/create_goal_controller.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'GoalList.dart';
+
 enum GoalPriorityEnum { High, Medium, Low }
 
 class CreateGoal extends StatefulWidget {
@@ -34,7 +36,11 @@ class _CreateGoalState extends State<CreateGoal> {
         endDate: controller.endDate.text.trim(),
         goalName: controller.goalName.text.trim());
 
-    await controller.createGoal(goal);
+    await controller.createGoal(goal).whenComplete(() => {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return GoalList();
+      },))
+    });
   }
 
   @override
