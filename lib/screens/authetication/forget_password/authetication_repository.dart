@@ -66,7 +66,7 @@ class AutheticationRepository extends GetxController {
     //
     SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
    await sharedPreferences.remove(Constant.authToken);
-   Get.to(Login());
+   Get.to(()=>Login());
   }
 
 //   phone authentication
