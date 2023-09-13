@@ -1,16 +1,60 @@
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
+import 'package:fanikisha_app/screens/authetication/logged_user_data_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 import '../widgets/bank_card.dart';
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
   DashboardPage({super.key});
 
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
   final controller = Get.put(AutheticationRepository());
+  final userController = Get.put(LoggedUserDataController());
+  bool _isAccountAdded = false;
+  List<dynamic> accountData = [];
+  String? accountHolder;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchAccountData();
+  }
+
+  // method to fetch user
+  void _fetchUser() {
+    // print(userController.getUserData());
+    userController.getUserData().then(
+          (value) => {
+            setState(
+              () => accountHolder=value!['fullName'],
+            )
+          },
+        );
+  }
+
+  // method to fetch account data
+  void _fetchAccountData() {
+    controller.fetchAccountData().then((value) => {
+          if (value!.isNotEmpty)
+            {
+              setState(() {
+                _isAccountAdded = true;
+                accountData = value['data'];
+                // print(accountData[0]['actual_balance']);
+              }),
+              _fetchUser()
+            }
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
+    _fetchAccountData();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -29,7 +73,13 @@ class DashboardPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          BankCard(cardHolder: "John Doe", bankAccountNumber: '**** **** **** **** ', isAccountAdded: false,),
+          BankCard(
+            cardHolder:_isAccountAdded?accountHolder!: "Unknown",
+            bankAccountNumber: _isAccountAdded
+                ? accountData[0]['account_number']
+                : '**** **** **** **** ',
+            isAccountAdded: _isAccountAdded,
+          ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -165,7 +215,6 @@ class DashboardPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
-
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -187,8 +236,6 @@ class DashboardPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
-
-
           ),
           const SizedBox(
             height: 20,

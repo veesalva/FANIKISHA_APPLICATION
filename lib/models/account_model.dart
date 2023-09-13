@@ -8,15 +8,15 @@ class AccountModel {
   AccountModel(
       {required this.userId,
       required this.accountNumber,
-      this.actualBalance,
-      this.currentBalance,
+      required this.actualBalance,
+      required this.currentBalance,
       required this.accountPin});
 
   AccountModel.fromJson(Map<String, dynamic> json) {
-    userId = json['user_id'];
+    userId = json['user_id'].toString();
     accountNumber = json['account_number'];
-    actualBalance = json['actual_balance'];
-    currentBalance = json['current_balance'];
+    actualBalance = json['actual_balance'].toString();
+    currentBalance = json['current_balance'].toString();
     accountPin = json['account_pin'];
   }
 

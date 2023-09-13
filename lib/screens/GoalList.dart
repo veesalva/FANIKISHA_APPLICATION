@@ -8,15 +8,17 @@ import '../widgets/goal.dart';
 
 class GoalList extends StatefulWidget {
   const GoalList({super.key});
+
   // todo: while creating goal null exception
   @override
   State<GoalList> createState() => _GoalListState();
 }
 
 class _GoalListState extends State<GoalList> {
-    Map<String,dynamic> dynamicData={};
+  Map<String, dynamic> dynamicData = {};
 
   final controller = Get.put(AutheticationRepository());
+  bool isLoading = true;
 
   void initState() {
     super.initState();
@@ -25,12 +27,18 @@ class _GoalListState extends State<GoalList> {
   }
 
   Future<void> fetchData() async {
-    // Simulate data fetching delay for 2 seconds (Replace with your data retrieval logic)
-    await controller.fetchData().then((value) => {
-      setState((){
-        dynamicData=value!;
-      }),
-    });
+    try {
+      final data = await controller.fetchData();
+      setState(() {
+        dynamicData = data ?? {}; // Set dynamicData to fetched data or an empty map if null
+        isLoading = false; // Data fetching is complete
+      });
+    } catch (error) {
+      print("Error fetching data: $error");
+      setState(() {
+        isLoading = true; // Data fetching failed
+      });
+    }
   }
 
   @override
@@ -65,22 +73,23 @@ class _GoalListState extends State<GoalList> {
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView.builder(
-        itemCount: dynamicData['data'].length,
-        itemBuilder: (BuildContext context, int index) {
-          GoalModel goal=GoalModel.fromJson(dynamicData['data'][index]);
-          return Goal(
-              goalName: goal.goalName,
-              goalDuration: goal.startDate! +
-                  "-" +
-                  goal.endDate!,
-              goalAmount: goal.goalAmount,
-              goalIcon: Icons.shopping_cart,
-              // todo:goalValue logic here
-              goalValue: 100);
-        },
-      ),
-
+      body: isLoading // Check if data is still loading
+          ? const Center(
+              child: CircularProgressIndicator(), // Display a loading indicator
+            )
+          : ListView.builder(
+              itemCount: dynamicData['data'].length,
+              itemBuilder: (BuildContext context, int index) {
+                GoalModel goal = GoalModel.fromJson(dynamicData['data'][index]);
+                return Goal(
+                    goalName: goal.goalName,
+                    goalDuration: goal.startDate! + "-" + goal.endDate!,
+                    goalAmount: goal.goalAmount,
+                    goalIcon: Icons.shopping_cart,
+                    // todo:goalValue logic here
+                    goalValue: 100);
+              },
+            ),
     );
   }
 }

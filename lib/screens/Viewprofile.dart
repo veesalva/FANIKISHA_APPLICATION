@@ -61,14 +61,6 @@ class _ViewProfileState extends State<ViewProfile> {
                   image: AssetImage("images/profile.jpg"), fit: BoxFit.cover),
             ),
           ),
-          const Align(
-            alignment: Alignment.center,
-            child: Text("Victoria Kundi"),
-          ),
-          const Align(
-            alignment: Alignment.center,
-            child: Text("victoriakundi@gmail.com"),
-          ),
           const SizedBox(height: 10),
           Container(
             margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),

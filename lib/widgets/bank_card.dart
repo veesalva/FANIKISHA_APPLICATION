@@ -13,6 +13,7 @@ class BankCard extends StatelessWidget {
   final bool isAccountAdded;
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: const EdgeInsets.all(25),
       width: 330,
@@ -102,7 +103,8 @@ class BankCard extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Text(
               bankAccountNumber,
-              style: TextStyle(
+              style: const TextStyle(
+                letterSpacing: 7.0,
                 color: Colors.white,
                 fontSize: 20,
               ),
@@ -126,14 +128,14 @@ class BankCard extends StatelessWidget {
                     style: const TextStyle(color: Colors.white, fontSize: 17),
                   ),
                 ]),
-                Column(children: [
-                  const Text(
-                    "Card Holder ",
+                const Column(children: [
+                  Text(
+                    "Expire Date",
                     style: TextStyle(color: Colors.white),
                   ),
                   Text(
-                    " ${cardHolder}",
-                    style: const TextStyle(color: Colors.white, fontSize: 17),
+                    "06/2025",
+                    style: TextStyle(color: Colors.white, fontSize: 17),
                   ),
                 ]),
                 const Column(children: [

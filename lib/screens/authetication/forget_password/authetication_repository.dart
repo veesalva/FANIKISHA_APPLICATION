@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constant/Constant.dart';
 import '../../../models/account_model.dart';
+import '../../../models/savings_model.dart';
 import '../../../models/user_model.dart';
 
 class AutheticationRepository extends GetxController {
@@ -190,6 +191,111 @@ class AutheticationRepository extends GetxController {
 //   fetch goal from the database
   Future<Map<String, dynamic>?> fetchData() async {
     final response = await http.get(Uri.parse('http://'+Constant.ipAddress+':5000/goals'));
+
+    if (response.statusCode == 200) {
+      // The request was successful, and you can parse the response here.
+      // print('Response data: ${response.body}');
+      final Map<String, dynamic> data = json.decode(response.body);
+      return data;
+    } else {
+      // The request failed or the server returned an error response.
+      print('Request failed with status: ${response.statusCode}');
+      return null;
+    }
+  }
+
+  // save Savings made
+  Future<bool> saveSavings(SavingsModel savingsModel) async {
+    final String apiUrl = 'http://' + Constant.ipAddress + ":5000/savings";
+    final Map<String, dynamic> data = savingsModel.toJson();
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 201) {
+      // Successfully created the record in the database
+      print('Data posted successfully');
+      return true;
+    } else {
+      // Failed to create the record
+      print('Failed to post data. Status code: ${response.statusCode}');
+      return false;
+    }
+  }
+
+  //   fetch savings from the database
+  Future<Map<String, dynamic>?> fetchDataSavings() async {
+    final response = await http.get(Uri.parse('http://'+Constant.ipAddress+':5000/savings'));
+
+    if (response.statusCode == 200) {
+      // The request was successful, and you can parse the response here.
+      // print('Response data: ${response.body}');
+      final Map<String, dynamic> data = json.decode(response.body);
+      return data;
+    } else {
+      // The request failed or the server returned an error response.
+      print('Request failed with status: ${response.statusCode}');
+      return null;
+    }
+  }
+
+  // update account info
+  Future<bool> updateAccountData(String accountNumber, Map<String, dynamic> updatedAccountData) async {
+    final url = Uri.parse('http://${Constant.ipAddress}:5000/accounts/$accountNumber'); // API URL to update user by ID
+
+    try {
+      final response = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json', // Set the content type to JSON
+        },
+        body: json.encode(updatedAccountData), // Convert the updatedUserData to JSON
+      );
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, the user data was successfully updated.
+        return true;
+      } else {
+        // If the server returns an error response, throw an exception or handle the error as needed.
+        throw Exception('Failed to update  account data');
+      }
+    } catch (e) {
+      // Handle network or other errors here.
+      print('Error: $e');
+      return false;
+    }
+  }
+
+  // method to fetch account data by account number
+  Future<Map<String, dynamic>?> fetchAccountDataByAccountNo(String accountNumber) async {
+    final url = Uri.parse(
+        'http://${Constant.ipAddress}:5000/accounts/$accountNumber'); // Api url to get user by id
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, parse the JSON data.
+        final Map<String, dynamic> data = json.decode(response.body);
+        return data;
+      } else {
+        // If the server returns an error response, throw an exception.
+        throw Exception('Failed to load account data');
+      }
+    } catch (e) {
+      // Handle network or other errors here.
+      print('Error: $e');
+      return null;
+    }
+  }
+  // fetch account data
+  Future<Map<String, dynamic>?> fetchAccountData() async {
+    final response = await http.get(Uri.parse('http://'+Constant.ipAddress+':5000/accounts'));
 
     if (response.statusCode == 200) {
       // The request was successful, and you can parse the response here.
