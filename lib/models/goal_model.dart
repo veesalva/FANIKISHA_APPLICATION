@@ -43,7 +43,7 @@ class GoalModel {
     goalId = json['goal_id'].toString();
     userId = json['user_id'].toString();
     goalName = json['goal_name'];
-    goalAmount = json['amount'];
+    goalAmount = json['amount'].toString();
     goalPriority = json['goal_priority'];
     goalPercent = json['goal_percent'];
     startDate =  DateFormat('yyyy-MM-dd').format(DateTime.parse(json['start_date'])).toString();
