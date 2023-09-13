@@ -1,4 +1,6 @@
+import 'package:fanikisha_app/screens/authetication/AuthService.dart';
 import 'package:fanikisha_app/screens/new_home.dart';
+import 'package:fanikisha_app/widgets/BottomNavigationBarWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:fanikisha_app/colors/colors.dart';
 
@@ -54,13 +56,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future startTimer() async {
+    bool isLoggedIn=await AuthService.isUserLoggenIn();
     await Future.delayed(const Duration(milliseconds: 5000));
     // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) {
-          return HomePageNew();
+          return isLoggedIn?BottomNavigationBarWidget():const HomePageNew();
         },
       ),
     );

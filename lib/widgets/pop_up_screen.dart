@@ -78,7 +78,9 @@ class _MyFormPopupState extends State<MyFormPopup> {
     final account = AccountModel(
         userId: userId,
         accountNumber: controller.accountNumber.text.trim(),
-        accountPin: controller.accountNumber.text.trim());
+        accountPin: controller.accountNumber.text.trim(),
+        actualBalance: '400000',
+        currentBalance: '400000');
     controller.saveAccountInfo(account);
   }
 }

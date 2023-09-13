@@ -227,3 +227,108 @@ app.get('/goals', function (req,res){
 
     });
 })
+
+//save savings into a database
+app.post('/savings', (req, res) => {
+  const account = req.body;
+  // Check if the user exists in a database
+  db.query('INSERT INTO savings SET ?', account, (err, result) => {
+             if (err) {
+               console.error('Error inserting savings info:', err);
+               res.status(500).json({ error: 'Failed to save savings info' });
+               return;
+             }
+
+             console.log('account inserted successfully');
+             res.status(201).json({ message: 'savings info  saved successfully', userId: result});
+           });
+});
+
+//api to get savings from database
+
+app.get('/savings', function (req,res){
+    db.query('SELECT * FROM savings', function (error, results, fields ){
+        if (!error){
+            return res.send({
+                error: false,
+                data: results,
+                message: 'goals list.'
+            });
+        } else {
+            throw error;
+        }
+
+    });
+})
+
+//api to get the accounts info from the database
+app.get('/accounts', function (req,res){
+    db.query('SELECT * FROM accounts', function (error, results, fields ){
+        if (!error){
+            return res.send({
+                error: false,
+                data: results,
+                message: 'goals list.'
+            });
+        } else {
+            throw error;
+        }
+
+    });
+})
+
+//api to get account by an aacount_number
+app.get('/accounts/:id', function (req,res){
+    let id = req.params.id;
+    if (!id){
+        return
+        res.status(400).send({
+            error: true,
+            message: 'Please provide _id'
+        });
+    }
+
+    db.query('SELECT * FROM accounts where account_number=?',id, function (error, results, fields ){
+        if (!error){
+            return res.send({
+                error: false,
+                data: results[0],
+                message: 'account '
+            });
+        } else {
+            throw error;
+        }
+
+    });
+})
+
+// PUT endpoint to update account data
+app.put('/accounts/:accountId', (req, res) => {
+  const accountId = req.params.accountId;
+  const updatedUserData = req.body;
+
+  // Check if the user exists based on email
+  db.query('SELECT * FROM accounts WHERE account_number = ?', [accountId], (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      res.status(500).json({ error: 'Failed to fetch account info' });
+      return;
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: 'account not found' });
+    }
+
+    // Update the user's data in the database
+    db.query('UPDATE accounts SET ? WHERE account_number = ?', [updatedUserData, accountId], (err, result) => {
+      if (err) {
+        console.error('Error updating user:', err);
+        res.status(500).json({ error: 'Failed to update account' });
+        return;
+      }
+
+      console.log('account updated successfully');
+      res.status(200).json({ message: 'account updated successfully' });
+    });
+  });
+});
