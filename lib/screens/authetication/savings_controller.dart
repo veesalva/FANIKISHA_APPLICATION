@@ -20,18 +20,32 @@ class SavingsController extends GetxController {
   final amount = TextEditingController();
 
   Future<void> saveSavings(SavingsModel savingsModel) async {
-      Map<String, dynamic> updatedAccountData={};
+    // to store goals from the database
+    Map<String, dynamic>? goalData = {};
+
+    Map<String, dynamic> updatedAccountData = {};
     await controller.saveSavings(savingsModel);
     await controller
         .fetchAccountDataByAccountNo(savingsModel.accountNumber.toString())
-        .then((value) => {
-          updatedAccountData=value?['data']
-    });
-     var accountData=AccountModel.fromJson(updatedAccountData);
-     // minus current_balance by amount of savings done
-     double currentBalance=double.parse(accountData.currentBalance!)-savingsModel.amount!;
-     accountData.currentBalance=currentBalance.toString();
-     updatedAccountData=accountData.toJson();
-    await controller.updateAccountData(account.text.trim(), updatedAccountData);
+        .then((value) => {updatedAccountData = value?['data']});
+    var accountData = AccountModel.fromJson(updatedAccountData);
+    // minus current_balance by amount of savings done
+    double currentBalance =
+        double.parse(accountData.currentBalance!) - savingsModel.amount!;
+    accountData.currentBalance = currentBalance.toString();
+    updatedAccountData = accountData.toJson();
+    await controller
+        .updateAccountData(account.text.trim(), updatedAccountData)
+        .whenComplete(() => controller.fetchData().then(
+              //get goal data whenComplete
+              (value) => {goalData = value},
+            ));
+      List<dynamic> goals = goalData?['data'];
+
+    for (int i = 0; i < goals.length; i++) {
+      Map<String, dynamic> goal = goals[i];
+      goal['current_balance']=(double.parse(goal['goal_percent'].toString()) *savingsModel.amount!*0.01).toString();
+      controller.updateGoal(goal['goal_name'], goal);
+    }
   }
 }

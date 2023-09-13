@@ -8,7 +8,6 @@ class GoalLogicController extends GetxController {
 
   final controller = Get.put(AutheticationRepository());
 
-
   Future<void> goalLogic() async {
     Map<String, dynamic>? goalData = {};
 
@@ -25,10 +24,10 @@ class GoalLogicController extends GetxController {
     List<dynamic> goalAllocationPercent = [];
 
     // total of all amount per day
-    double totalAmountPerDay=0;
+    double totalAmountPerDay = 0;
 
     // total of all amount per day
-    double pdWeightTotal=0;
+    double pdWeightTotal = 0;
 
     await controller.fetchData().then((value) => {goalData = value});
     List<dynamic> goals = goalData?['data'];
@@ -50,7 +49,7 @@ class GoalLogicController extends GetxController {
             highestPriority.toDouble())
         .toList();
 
-  //   finding total amount per day
+    //   finding total amount per day
     goals.forEach((goal) {
       totalAmountPerDay += goal["amount_per_day"];
     });
@@ -58,8 +57,7 @@ class GoalLogicController extends GetxController {
     // finding the priority weight
     durationWeight = goals
         .map((goal) =>
-    double.parse(goal["amount_per_day"].toString()) /
-        totalAmountPerDay)
+            double.parse(goal["amount_per_day"].toString()) / totalAmountPerDay)
         .toList();
 
     // multiply priorityWeight and durationWeight
@@ -67,28 +65,23 @@ class GoalLogicController extends GetxController {
       pDWeight.add(priorityWeight[i] * durationWeight[i]);
     }
 
-  //   pdWeights total
+    //   pdWeights total
     for (double value in pDWeight) {
       pdWeightTotal += value;
     }
 
     // finding the percentage allocation
     for (int i = 0; i < pDWeight.length; i++) {
-      goalAllocationPercent.add(pDWeight[i]/pdWeightTotal);
+      goalAllocationPercent.add(pDWeight[i] / pdWeightTotal);
     }
 
     // updating account percentage
     for (int i = 0; i < goals.length; i++) {
-       Map<String,dynamic > goal= goals[i];
-       goal['goal_percent']=goalAllocationPercent[i]*100;
-       controller.updateGoal(goal['goal_name'], goal);
+      Map<String, dynamic> goal = goals[i];
+      goal['goal_percent'] = goalAllocationPercent[i] * 100;
+      controller.updateGoal(goal['goal_name'], goal);
     }
-
   }
-
-
-
-
 
 //
 }

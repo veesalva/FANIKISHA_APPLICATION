@@ -9,13 +9,14 @@ class Goal extends StatelessWidget {
     required this.goalDuration,
     required this.goalAmount,
     required this.goalIcon,
-    required this.goalValue});
+    required this.goalValue,required this.goalIndex});
 
   final String? goalName;
   final String? goalDuration;
   final String? goalAmount;
   final IconData? goalIcon;
   final int? goalValue;
+  final int? goalIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class Goal extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const GoalDetails();
+                    return  GoalDetails(goalIndex: goalIndex,);
                   },
                 ),
               );

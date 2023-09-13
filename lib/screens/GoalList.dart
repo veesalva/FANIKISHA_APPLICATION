@@ -30,7 +30,8 @@ class _GoalListState extends State<GoalList> {
     try {
       final data = await controller.fetchData();
       setState(() {
-        dynamicData = data ?? {}; // Set dynamicData to fetched data or an empty map if null
+        dynamicData = data ??
+            {}; // Set dynamicData to fetched data or an empty map if null
         isLoading = false; // Data fetching is complete
       });
     } catch (error) {
@@ -82,12 +83,14 @@ class _GoalListState extends State<GoalList> {
               itemBuilder: (BuildContext context, int index) {
                 GoalModel goal = GoalModel.fromJson(dynamicData['data'][index]);
                 return Goal(
-                    goalName: goal.goalName,
-                    goalDuration: goal.startDate! + "-" + goal.endDate!,
-                    goalAmount: goal.goalAmount,
-                    goalIcon: Icons.shopping_cart,
-                    // todo:goalValue logic here
-                    goalValue: 100);
+                  goalName: goal.goalName,
+                  goalDuration: goal.startDate! + "-" + goal.endDate!,
+                  goalAmount: goal.goalAmount,
+                  goalIcon: Icons.shopping_cart,
+                  // todo:goalValue logic here
+                  goalValue: 100,
+                  goalIndex: index,
+                );
               },
             ),
     );
