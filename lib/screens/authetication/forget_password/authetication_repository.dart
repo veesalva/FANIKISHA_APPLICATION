@@ -308,4 +308,31 @@ class AutheticationRepository extends GetxController {
       return null;
     }
   }
+
+  // update account info
+  Future<bool> updateGoal(String goalName, Map<String, dynamic> updatedGoalData) async {
+    final url = Uri.parse('http://${Constant.ipAddress}:5000/goals/$goalName'); // API URL to update user by ID
+
+    try {
+      final response = await http.put(
+        url,
+        headers: {
+          'Content-Type': 'application/json', // Set the content type to JSON
+        },
+        body: json.encode(updatedGoalData), // Convert the updatedUserData to JSON
+      );
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, the user data was successfully updated.
+        return true;
+      } else {
+        // If the server returns an error response, throw an exception or handle the error as needed.
+        throw Exception('Failed to update  goals data');
+      }
+    } catch (e) {
+      // Handle network or other errors here.
+      print('Error: $e');
+      return false;
+    }
+  }
 }

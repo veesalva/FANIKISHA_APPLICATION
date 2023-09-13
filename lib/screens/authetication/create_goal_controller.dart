@@ -1,9 +1,9 @@
 import 'package:fanikisha_app/models/goal_model.dart';
 import 'package:fanikisha_app/repository/user_repository.dart';
 import 'package:fanikisha_app/screens/authetication/forget_password/authetication_repository.dart';
+import 'package:fanikisha_app/screens/authetication/goal_logic_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
 import '../../models/user_model.dart';
 
 class CreateGoalController extends GetxController {
@@ -11,7 +11,7 @@ class CreateGoalController extends GetxController {
   static CreateGoalController get instance => Get.find();
 
   final userRepository = Get.put(AutheticationRepository());
-
+  final goalLogicController = Get.put(GoalLogicController());
   // fields to get data from user
   final goalName = TextEditingController();
   final amount = TextEditingController();
@@ -23,6 +23,10 @@ class CreateGoalController extends GetxController {
   Future<void> createGoal(GoalModel goal) async {
     await AutheticationRepository.instance
         .saveGoal(goal)
-        .then((value) => {print(value)});
+        .then((value) => {
+
+    }).whenComplete(() => {
+      goalLogicController.goalLogic()
+    });
   }
 }

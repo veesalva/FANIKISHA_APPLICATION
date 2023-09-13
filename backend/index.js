@@ -332,3 +332,34 @@ app.put('/accounts/:accountId', (req, res) => {
     });
   });
 });
+
+//api to update goal
+app.put('/goals/:goalName', (req, res) => {
+  const goalName = req.params.goalName;
+  const updatedUserData = req.body;
+
+  // Check if the goal exists based on goalName
+  db.query('SELECT * FROM goals WHERE goal_name = ?', [goalName], (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      res.status(500).json({ error: 'Failed to fetch goal' });
+      return;
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: 'goal not found' });
+    }
+
+    // Update the goal's data in the database
+    db.query('UPDATE goals SET ? WHERE goal_name = ?', [updatedUserData, goalName], (err, result) => {
+      if (err) {
+        console.error('Error updating goal:', err);
+        res.status(500).json({ error: 'Failed to update goal' });
+        return;
+      }
+
+      console.log('goal updated successfully');
+      res.status(200).json({ message: 'goal updated successfully' });
+    });
+  });
+});

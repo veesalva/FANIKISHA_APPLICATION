@@ -23,7 +23,9 @@ class GoalModel {
         required this.endDate,
         this.goalId,
         required this.currentBalance,
-        required this.goalName});
+        required this.goalName,
+        this.goalPercent
+      });
 
   toJson() {
     return {
@@ -32,7 +34,7 @@ class GoalModel {
       "amount": goalAmount,
       "goal_priority": goalPriority,
       // todo change percent logic here
-      "goal_percent": '12%',
+      "goal_percent": goalPercent??'12%',
       "start_date": startDate,
       "end_date": endDate,
       "current_balance":currentBalance
