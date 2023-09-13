@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
           primary: AppColors.primaryColor,
           secondary: AppColors.accentColor,
         ),
+
       ),
       transitionDuration: const Duration(milliseconds: 500),
       home: SplashScreen(),

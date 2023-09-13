@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import 'GoalList.dart';
 
-enum GoalPriorityEnum { High, Medium, Low }
+enum GoalPriorityEnum { High, Medium_High, Medium, Medium_Low, Low }
 
 class CreateGoal extends StatefulWidget {
   const CreateGoal({super.key});
@@ -23,6 +23,23 @@ class _CreateGoalState extends State<CreateGoal> {
   // field for selected dates from an to
   DateTime fromSelectedDate = DateTime.now();
   DateTime toSelectedDate = DateTime.now();
+  // return int for selected priority
+  int goalPriority(String priority) {
+    switch (_goalPriorityEnum) {
+      case GoalPriorityEnum.High:
+        return 5;
+      case GoalPriorityEnum.Medium_High:
+        return 4;
+      case GoalPriorityEnum.Medium:
+        return 3;
+      case GoalPriorityEnum.Medium_Low:
+        return 2;
+      case GoalPriorityEnum.Low:
+        return 1;
+      default:
+        return 0;
+    }
+  }
 
   void _saveGoal(BuildContext context) async {
     controller.goalPriority.text = _goalPriorityEnum.toString().split('.')[1];
@@ -31,16 +48,20 @@ class _CreateGoalState extends State<CreateGoal> {
         goalType: "food",
         goalAmount: controller.amount.text.trim(),
         paymentNumber: "09748127981",
-        goalPriority: controller.goalPriority.text.trim(),
+        goalPriority: goalPriority(controller.goalPriority.text.trim()).toString(),
         startDate: controller.startDate.text.trim(),
         endDate: controller.endDate.text.trim(),
-        goalName: controller.goalName.text.trim());
+        goalName: controller.goalName.text.trim(),
+        currentBalance: "0"
+    );
 
     await controller.createGoal(goal).whenComplete(() => {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return GoalList();
-      },))
-    });
+          Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) {
+              return GoalList();
+            },
+          ))
+        });
   }
 
   @override
@@ -82,49 +103,49 @@ class _CreateGoalState extends State<CreateGoal> {
             padding: const EdgeInsets.all(8.0),
             child: Form(
                 child: Column(
-                  children: [
-                    TextFormField(
-                      controller: controller.goalName,
-                      decoration: const InputDecoration(
-                        labelText: "Goal Name",
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: "Goal Type",
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      controller: controller.amount,
-                      decoration: const InputDecoration(
-                        labelText: "Amount",
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: "Payment Number",
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                )),
+              children: [
+                TextFormField(
+                  controller: controller.goalName,
+                  decoration: const InputDecoration(
+                    labelText: "Goal Name",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: "Goal Type",
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  controller: controller.amount,
+                  decoration: const InputDecoration(
+                    labelText: "Amount",
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: "Payment Number",
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+              ],
+            )),
           ),
           Container(
             margin: const EdgeInsets.all(15),
@@ -158,11 +179,11 @@ class _CreateGoalState extends State<CreateGoal> {
                     hoverColor: Colors.green,
                     activeColor: Colors.green,
                     contentPadding: const EdgeInsets.only(left: 4.0),
-                    value: GoalPriorityEnum.Medium,
+                    value: GoalPriorityEnum.Medium_High,
                     groupValue: _goalPriorityEnum,
                     dense: true,
                     title: Text(
-                      GoalPriorityEnum.Medium.name,
+                      GoalPriorityEnum.Medium_High.name,
                       style: const TextStyle(fontSize: 15),
                     ),
                     onChanged: (val) {
@@ -176,6 +197,47 @@ class _CreateGoalState extends State<CreateGoal> {
                     hoverColor: Colors.green,
                     activeColor: Colors.green,
                     contentPadding: const EdgeInsets.only(left: 2.0),
+                    value: GoalPriorityEnum.Medium,
+                    groupValue: _goalPriorityEnum,
+                    dense: true,
+                    title: Text(
+                      GoalPriorityEnum.Medium.name,
+                      style: const TextStyle(fontSize: 15),
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        _goalPriorityEnum = val;
+                      });
+                    }),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: RadioListTile<GoalPriorityEnum>(
+                    hoverColor: Colors.green,
+                    activeColor: Colors.green,
+                    contentPadding: const EdgeInsets.only(left: 20.0),
+                    value: GoalPriorityEnum.Medium_Low,
+                    groupValue: _goalPriorityEnum,
+                    dense: true,
+                    title: Text(
+                      GoalPriorityEnum.Medium_Low.name,
+                      style: const TextStyle(fontSize: 15),
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        _goalPriorityEnum = val;
+                      });
+                    }),
+              ),
+              Spacer(),
+              Expanded(
+                child: RadioListTile<GoalPriorityEnum>(
+                    hoverColor: Colors.green,
+                    activeColor: Colors.green,
+                    contentPadding: const EdgeInsets.only(left: 4.0),
                     value: GoalPriorityEnum.Low,
                     groupValue: _goalPriorityEnum,
                     dense: true,
@@ -207,7 +269,7 @@ class _CreateGoalState extends State<CreateGoal> {
                     Text(
                       'From:',
                       style:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -217,7 +279,7 @@ class _CreateGoalState extends State<CreateGoal> {
                     Text(
                       'To:',
                       style:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -250,10 +312,12 @@ class _CreateGoalState extends State<CreateGoal> {
                       if (pickedDate != null) {
                         setState(() {
                           selectedStartDate = pickedDate;
-                          controller.startDate.text = "${pickedDate.toLocal()}".split(' ')[0]; // Format the date as needed
+                          controller.startDate.text = "${pickedDate.toLocal()}"
+                              .split(' ')[0]; // Format the date as needed
                         });
                       }
-                    },),
+                    },
+                  ),
                 ),
               ),
               const SizedBox(width: 100),
@@ -282,7 +346,8 @@ class _CreateGoalState extends State<CreateGoal> {
                       if (pickedDate != null) {
                         setState(() {
                           selectedEndDate = pickedDate;
-                          controller.endDate.text = "${pickedDate.toLocal()}".split(' ')[0]; // Format the date as needed
+                          controller.endDate.text = "${pickedDate.toLocal()}"
+                              .split(' ')[0]; // Format the date as needed
                         });
                       }
                     },

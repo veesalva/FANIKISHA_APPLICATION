@@ -11,6 +11,7 @@ class GoalModel {
    String? startDate;
    String? endDate;
    String? goalPercent;
+   String? currentBalance;
 
   GoalModel(
       {required this.userId,
@@ -21,6 +22,7 @@ class GoalModel {
         required this.startDate,
         required this.endDate,
         this.goalId,
+        required this.currentBalance,
         required this.goalName});
 
   toJson() {
@@ -33,6 +35,7 @@ class GoalModel {
       "goal_percent": '12%',
       "start_date": startDate,
       "end_date": endDate,
+      "current_balance":currentBalance
     };
   }
 
@@ -45,5 +48,6 @@ class GoalModel {
     goalPercent = json['goal_percent'];
     startDate =  DateFormat('yyyy-MM-dd').format(DateTime.parse(json['start_date'])).toString();
     endDate = DateFormat('yyyy-MM-dd').format(DateTime.parse(json['end_date'])).toString();
+    currentBalance = json['current_balance'];
   }
 }
