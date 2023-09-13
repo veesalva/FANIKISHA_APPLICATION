@@ -2,6 +2,7 @@ import 'package:fanikisha_app/screens/authetication/forget_password/autheticatio
 import 'package:fanikisha_app/screens/authetication/logged_user_data_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:fanikisha_app/screens/saving_plan_options.dart';
 import 'package:fanikisha_app/colors/colors.dart'; // custom added colors
 import '../widgets/bank_card.dart';
 
@@ -157,18 +158,25 @@ class _DashboardPageState extends State<DashboardPage> {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Row(
-              children: [
-                Icon(Icons.save_rounded),
-                Text("Save"),
-                Spacer(),
-                Icon(Icons.next_plan_rounded),
-                Text("Choose Plan"),
-              ],
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return const SavingPlanOptions();
+                },
+              ));
+            },
+            child:const Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  Icon(Icons.next_plan_rounded),
+                  Text("Choose Plan"),
+                ],
+              ),
             ),
           ),
+
           Container(
             margin: const EdgeInsets.fromLTRB(20, 20, 20, 5),
             child: const Text(
